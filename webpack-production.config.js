@@ -3,6 +3,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const config = {
   entry: [path.join(__dirname, '/src/app/app.js')],
@@ -27,6 +28,17 @@ const config = {
     new TransferWebpackPlugin([
       {from: 'www'},
     ], path.resolve(__dirname, 'src')),
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: 'ad-asset-cache1',
+        filename: 'ad-service-worker.js',
+        maximumFileSizeToCacheInBytes: 4194304,
+        runtimeCaching: [{
+          handler: 'cacheFirst',
+          urlPattern: /\.(gif|jpg|jpeg|png)$/i,
+        }],
+      }
+    ),
   ],
   module: {
     loaders: [

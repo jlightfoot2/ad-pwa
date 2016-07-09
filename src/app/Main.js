@@ -17,7 +17,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MoreHorizIcon from 'material-ui/svg-icons/navigation/more-horiz';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
-
+import { Link } from 'react-router'
 import { Router, Route, hashHistory } from 'react-router'
 
 const styles = {
@@ -82,9 +82,10 @@ class Main extends Component {
 			        targetOrigin={{horizontal: 'left', vertical: 'top'}}
 			        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
 			      >
-			        <MenuItem primaryText="Home" />
-			        <MenuItem primaryText="Help" />
-			        <MenuItem primaryText="Sign out" />
+			        <MenuItem primaryText="Home" containerElement={<Link to="/" />} />
+			        <MenuItem primaryText="My Apps" containerElement={<Link to="/myapps" />} />
+              <MenuItem primaryText="Catalog" containerElement={<Link to="/catalog" />} />
+		
 			      </IconMenu>
 			    }
 

@@ -4,6 +4,8 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import { connect } from 'react-redux';
+import { moveT2AppToMyApps } from './actions';
 
 const styles = {
   root: {
@@ -12,55 +14,51 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: 500,
-    height: 500,
+    width: 300,
+    height: 300,
     overflowY: 'auto',
     marginBottom: 24,
   },
 };
 
-const tilesData = [
-  {
-    img: require('../images/ad_injury_topics_lg.png'),
-    title: 'Physical Injuries',
-    author: 'T2',
-  },
-  {
-    img: require('../images/intro-pts.png'),
-    title: 'PTS',
-    author: 'T2',
-  },
-  {
-    img: require('../images/ad_tobacco_topics_lg.png'),
-    title: 'Tobacco',
-    author: 'T2',
-  },
-  {
-    img: require('../images/lg-icon-b2r_3.png'),
-    title: 'Breath to Relax',
-    author: 'T2',
-  }
-];
 
- const Prescriptions = () => (
+const Catalog = ({appList,moveToMyApps}) => {
+	return (
   <div style={styles.root}>
     <GridList
-      cellHeight={200}
+      cellHeight={100}
       style={styles.gridList}
     >
-      <Subheader>Your Scripts</Subheader>
-      {tilesData.map((tile) => (
+      <Subheader>T2 Catalog</Subheader>
+      {appList.map((tile) => (
         <GridTile
           key={tile.img}
           title={tile.title}
           subtitle={<span>by <b>{tile.author}</b></span>}
-         
+          onClick={() => moveToMyApps(tile.id)}
         >
           <img src={tile.img} />
         </GridTile>
       ))}
     </GridList>
-  </div>
-);
+  </div>);
+};
 
-export default Prescriptions
+const mapStateToProps = (state) => {
+  return {
+    appList: state.t2AppIds.map((v) => state.apps.get(v+""))
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    moveToMyApps: (id) => {
+      dispatch(moveT2AppToMyApps(id))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Catalog);
