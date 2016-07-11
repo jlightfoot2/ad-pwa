@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { connect } from 'react-redux';
-import {moveMyAppToT2Apps} from './actions';
+import {removeT2AppFromMyApps} from './actions';
 
 const styles = {
   root: {
@@ -22,7 +22,7 @@ const styles = {
 };
 
 
- const MyApps = ({appList,moveToT2Apps}) => (
+ const MyApps = ({appList,removeT2App}) => (
   <div style={styles.root}>
     <GridList
       cellHeight={200}
@@ -34,7 +34,7 @@ const styles = {
           key={tile.img}
           title={tile.title}
           subtitle={<span>by <b>{tile.author}</b></span>}
-          onClick={() => moveToT2Apps(tile.id)}
+          onClick={() => removeT2App(tile.id)}
         >
           <img src={tile.img}  />
         </GridTile>
@@ -51,8 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    moveToT2Apps: (id) => {
-      dispatch(moveMyAppToT2Apps(id))
+    removeT2App: (id) => {
+      dispatch(removeT2AppFromMyApps(id))
     }
   }
 }

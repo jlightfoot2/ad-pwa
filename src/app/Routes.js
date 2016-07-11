@@ -8,6 +8,8 @@ import { Router, Route, hashHistory } from 'react-router'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import appHub from './reducers'
+import { Map } from 'immutable';
+
 let store = createStore(appHub);
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())

@@ -1,12 +1,13 @@
 
-export const ADD_APP_TO_MYAPPS_LIST = 'ADD_APP_TO_MYAPPS_LIST';
+export const ADD_T2APP_TO_MYAPPS_LIST = 'ADD_T2APP_TO_MYAPPS_LIST';
 export const REMOVE_APP_FROM_T2APPS_LIST = 'REMOVE_APP_FROM_T2APPS_LIST';
 
-export const ADD_APP_TO_T2APPS_LIST = 'ADD_APP_TO_T2APPS_LIST';
-export const REMOVE_APP_FROM_MYAPPS_LIST = 'REMOVE_APP_FROM_MYAPPS_LIST';
+export const REMOVE_T2APP_FROM_MYAPPS_LIST = 'REMOVE_T2APP_FROM_MYAPPS_LIST';
 
 export const MOVE_T2APP_TO_MYAPPS_LIST = 'MOVE_T2APP_TO_MYAPPS_LIST';
 export const MOVE_MYAPP_TO_T2APPS_LIST = 'MOVE_MYAPP_TO_T2APPS_LIST';
+
+export const TOGGLE_T2APP_FROM_MYAPPS_LIST = 'TOGGLE_T2APP_FROM_MYAPPS_LIST';
 
 export const moveT2AppToMyApps = (id) => {
 	return {
@@ -20,6 +21,27 @@ export const  moveMyAppToT2Apps = (id) =>{
 		type: MOVE_MYAPP_TO_T2APPS_LIST,
 		id
 	};
+}
+
+export const addT2AppsToMyApps = (id) => {
+	return {
+		type: ADD_T2APP_TO_MYAPPS_LIST,
+		id
+	};	
+}
+
+export const removeT2AppFromMyApps = (id) => {
+	return {
+		type: REMOVE_T2APP_FROM_MYAPPS_LIST,
+		id
+	};	
+}
+
+export const toggleT2AppFromMyList = (id) => {
+	return {
+		type: TOGGLE_T2APP_FROM_MYAPPS_LIST,
+		id
+	};	
 }
 
 /*
