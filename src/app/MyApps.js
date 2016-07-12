@@ -45,7 +45,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
   return {
-    appList: state.myAppIds.map((v) => state.apps.get(v+""))
+    appList: state.myAppIds.map((v) => state.apps[v+""])
   }
 }
 

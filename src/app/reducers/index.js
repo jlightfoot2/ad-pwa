@@ -1,10 +1,13 @@
 import {combineReducers} from 'redux'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import {
 	MOVE_T2APP_TO_MYAPPS_LIST, 
 	MOVE_MYAPP_TO_T2APPS_LIST, 
 	ADD_T2APP_TO_MYAPPS_LIST,
 	REMOVE_T2APP_FROM_MYAPPS_LIST,
-	TOGGLE_T2APP_FROM_MYAPPS_LIST
+	TOGGLE_T2APP_FROM_MYAPPS_LIST,
+	USER_SEES_INTRO
 } from '../actions'
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { List, Map } from 'immutable';
@@ -54,24 +57,70 @@ const appTree = {
 }
 
 var t2apps = normalize(appTree.apps,arrayOf(appitem));
-console.log(t2apps);
+
 const appItems = t2apps.entities.appitems;
 
 
-const initT2AppIds = List(t2apps.result);
-const initMyAppIds = List();
+const initT2AppIds = t2apps.result;
+const initMyAppIds = [];
 
 
 //just containes an object list of all apps
+function updateMapItem(state,id,cb){
+	var item = state[id+""];
+
+	state[id+""] = {...cb(null,item)};
+	return {...state};
+}
+
+function arrayHasItem(arr,val){
+	return arr.indexOf(val) > -1
+}
+
+function arrayPush(arr,val){
+	arr.push(val);
+	return [...arr];
+}
+
+function arrayPushUnique(arr,val){
+	if(!arrayHasItem(arr,val)){
+		return arrayPush(arr,val)
+	}
+	return [...arr];
+}
+
+function arrayDeleteValue(arr,val){
+	if(arrayHasItem(arr,val)){
+		arr.splice(arr.indexOf(val),1);
+	}
+	return [...arr];
+}
+
+var defaultUser = {
+	stage: 0, //intro stage
+	role: 'anonymous',
+	firstname: '',
+	lastname: ''	
+}
+
+function user(state = defaultUser, action){
+	switch(action.type){
+		case USER_SEES_INTRO:
+		    state.stage = 1;
+			return  {...state};
+	}
+	return state;
+}
+
 function apps(state = appItems , action){
 
 	switch(action.type){
 
 		case TOGGLE_T2APP_FROM_MYAPPS_LIST:
-			console.log('toggle state called '+action.id);
-			//return state.updateIn(action.id+"", 'installed',(v) => !v)
-			state[action.id+""].installed = state[action.id+""].installed ? false : true;
-			return Object.assign({},state);
+			return updateMapItem(state,action.id,function(err,item){
+				item.installed = !item.installed;
+				return item
+			});
 	}
 
 	return state;
@@ -79,20 +128,20 @@ function apps(state = appItems , action){
 
 function t2AppIds(state = initT2AppIds, action){
 	switch(action.type){
- 
+
 	}
 	return state;
 }
 
 function myAppIds(state = initMyAppIds, action){
-	return state;
+
 	switch(action.type){
-		case MOVE_T2APP_TO_MYAPPS_LIST:
 		case ADD_T2APP_TO_MYAPPS_LIST:
-			return state.push(action.id)
-		case MOVE_MYAPP_TO_T2APPS_LIST:
+			return arrayPushUnique(state,action.id);
+		case TOGGLE_T2APP_FROM_MYAPPS_LIST:
+			return arrayHasItem(state,action.id) ? arrayDeleteValue(state,action.id) : arrayPushUnique(state,action.id);
 		case REMOVE_T2APP_FROM_MYAPPS_LIST:
-			return state.delete(state.keyOf(action.id));	
+			return arrayDeleteValue(state,action.id);	
 	}
 	return state;
 }
@@ -101,7 +150,9 @@ function myAppIds(state = initMyAppIds, action){
 const appHub = combineReducers({
   apps,
   t2AppIds,
-  myAppIds
+  myAppIds,
+  routing: routerReducer,
+  user
 });
 
 

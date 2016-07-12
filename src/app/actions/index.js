@@ -9,6 +9,12 @@ export const MOVE_MYAPP_TO_T2APPS_LIST = 'MOVE_MYAPP_TO_T2APPS_LIST';
 
 export const TOGGLE_T2APP_FROM_MYAPPS_LIST = 'TOGGLE_T2APP_FROM_MYAPPS_LIST';
 
+export const USER_SEES_INTRO = 'USER_SEES_INTRO';
+export const userSeesIntro = () => {
+	return {
+		type: USER_SEES_INTRO
+	}
+};
 export const moveT2AppToMyApps = (id) => {
 	return {
 		type: MOVE_T2APP_TO_MYAPPS_LIST ,
@@ -43,20 +49,4 @@ export const toggleT2AppFromMyList = (id) => {
 		id
 	};	
 }
-
-/*
-function removeAppFromMyApps(id){
-	return {
-		type: ADD_APP_TO_MYAPPS_LIST,
-		id
-	}
-}
-
-function addAppToMyApps(id){
-	return {
-		type: ADD_APP_TO_MYAPPS_LIST,
-		id
-	}
-}
-*/
 
