@@ -19,7 +19,7 @@ import MoreHorizIcon from 'material-ui/svg-icons/navigation/more-horiz';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import { Link } from 'react-router'
 import { Router, Route, hashHistory } from 'react-router'
-
+import AppSnackBar from './AppSnackBar.js'
 const styles = {
   container: {
 
@@ -91,7 +91,7 @@ class Main extends Component {
               title="Your Scrips" />
               {this.props.children}
         </div>
-
+           <AppSnackBar />
         </Paper>
       </MuiThemeProvider>
     );

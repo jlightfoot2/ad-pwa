@@ -7,10 +7,13 @@ import {
 	ADD_T2APP_TO_MYAPPS_LIST,
 	REMOVE_T2APP_FROM_MYAPPS_LIST,
 	TOGGLE_T2APP_FROM_MYAPPS_LIST,
-	USER_SEES_INTRO
+	USER_SEES_INTRO,
+	SHOW_FLASH_MESSAGE,
+	HIDE_FLASH_MESSAGE
 } from '../actions'
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { List, Map } from 'immutable';
+
 const appitem = new Schema('appitems');
 
 appitem.define({
@@ -96,12 +99,19 @@ function arrayDeleteValue(arr,val){
 	return [...arr];
 }
 
-var defaultUser = {
+const defaultUser = {
 	stage: 0, //intro stage
 	role: 'anonymous',
 	firstname: '',
 	lastname: ''	
 }
+
+const defaultView = {
+	flash: {
+		message: '',
+		open: false
+	}
+};
 
 function user(state = defaultUser, action){
 	switch(action.type){
@@ -146,13 +156,29 @@ function myAppIds(state = initMyAppIds, action){
 	return state;
 }
 
+function view(state = defaultView, action){
+	switch(action.type){
+		case SHOW_FLASH_MESSAGE:
+			console.log(state)
+			state.flash.message = action.text;
+			state.flash.open = true;
+			return {...state}; 
+		case HIDE_FLASH_MESSAGE:
+			state.flash.message = '';
+			state.flash.open = false;
+			return {...state}; 
+	}
+	return state;
+}
+
 
 const appHub = combineReducers({
   apps,
   t2AppIds,
   myAppIds,
   routing: routerReducer,
-  user
+  user,
+  view
 });
 
 
