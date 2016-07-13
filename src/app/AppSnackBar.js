@@ -8,7 +8,7 @@ const AppSnackBar = ({open,message,close}) => {
         <Snackbar
           open={open}
           message={message}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
           onRequestClose={close}
         />
 		);

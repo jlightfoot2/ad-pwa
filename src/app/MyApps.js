@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { connect } from 'react-redux';
-import {removeT2AppFromMyApps} from './actions';
+import { showFlashMessage,removeT2AppFromMyApps} from './actions';
 
 const styles = {
   root: {
@@ -22,19 +22,24 @@ const styles = {
 };
 
 
- const MyApps = ({appList,removeT2App}) => (
+ const MyApps = ({appList,removeT2App,flashMessage}) => (
   <div style={styles.root}>
     <GridList
       cellHeight={200}
       style={styles.gridList}
     >
-      <Subheader>Your Scripts</Subheader>
+
+      <Subheader>Dashboard</Subheader>
+
       {appList.map((tile) => (
         <GridTile
           key={tile.img}
           title={tile.title}
           subtitle={<span>by <b>{tile.author}</b></span>}
-          onClick={() => removeT2App(tile.id)}
+          onClick={() => {
+            flashMessage(tile.title+ " has been removed from your dashboard");
+            removeT2App(tile.id);
+          }}
         >
           <img src={tile.img}  />
         </GridTile>
@@ -53,7 +58,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeT2App: (id) => {
       dispatch(removeT2AppFromMyApps(id))
-    }
+    },
+    flashMessage: (text) => dispatch(showFlashMessage(text))
   }
 }
 

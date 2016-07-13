@@ -50,6 +50,10 @@ const config = {
       {
         test:   /\.(png|gif|jpe?g|svg)$/i,
         loader: 'url?limit=10000',
+      },
+      {
+        test:   /\.(json)$/i,
+        loader: 'json',
       }
     ],
   },

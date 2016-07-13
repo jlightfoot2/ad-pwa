@@ -125,7 +125,11 @@ function user(state = defaultUser, action){
 function apps(state = appItems , action){
 
 	switch(action.type){
-
+		case REMOVE_T2APP_FROM_MYAPPS_LIST:
+			return updateMapItem(state,action.id,function(err,item){
+				item.installed = false;
+				return item
+			});
 		case TOGGLE_T2APP_FROM_MYAPPS_LIST:
 			return updateMapItem(state,action.id,function(err,item){
 				item.installed = !item.installed;
@@ -159,7 +163,6 @@ function myAppIds(state = initMyAppIds, action){
 function view(state = defaultView, action){
 	switch(action.type){
 		case SHOW_FLASH_MESSAGE:
-			console.log(state)
 			state.flash.message = action.text;
 			state.flash.open = true;
 			return {...state}; 
