@@ -10,8 +10,7 @@ var
   https = require('https'),
   http = require('http')
   ;
-
-
+  
 /*
 const options = {
   key: fs.readFileSync('sslcert/agent2-key.pem'),

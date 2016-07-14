@@ -8,7 +8,11 @@ import {render} from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Routes from './Routes'; // Our custom react component
 import "./reducers";
-import '../www/manifest.json';
+var manifest = require("file?name=manifest.json!json-file!json!./manifest.json");
+
+//console.log(manifest);
+//require("file!/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/webpack-material-ui/src/images/icons/icon-128x128.pngd")
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
