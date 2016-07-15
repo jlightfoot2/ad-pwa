@@ -19,13 +19,19 @@ const styles = {
     overflowY: 'auto',
     marginBottom: 24,
   },
+  img: {
+    width: '100px',
+    height: '100px'
+  }
 };
 
 
  const MyApps = ({appList,removeT2App,flashMessage}) => (
   <div style={styles.root}>
     <GridList
-      cellHeight={200}
+      cellHeight={100}
+      cols={4}
+      padding={20}
       style={styles.gridList}
     >
 
@@ -33,11 +39,10 @@ const styles = {
 
       {appList.map((tile) => (
         <GridTile
-          key={tile.img}
-          title={tile.title}
-          subtitle={<span>by <b>{tile.author}</b></span>}
+          key={tile.id}
+
           onClick={() => {
-            flashMessage(tile.title+ " has been removed from your dashboard");
+            flashMessage(tile.title+ " has been removed from \"My Apps\"");
             removeT2App(tile.id);
           }}
         >

@@ -9,7 +9,8 @@ import {
 	TOGGLE_T2APP_FROM_MYAPPS_LIST,
 	USER_SEES_INTRO,
 	SHOW_FLASH_MESSAGE,
-	HIDE_FLASH_MESSAGE
+	HIDE_FLASH_MESSAGE,
+	TAB_CHANGE_INDEX
 } from '../actions'
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { List, Map } from 'immutable';
@@ -110,6 +111,9 @@ const defaultView = {
 	flash: {
 		message: '',
 		open: false
+	},
+	tabs: {
+		mainTab: 0
 	}
 };
 
@@ -170,6 +174,14 @@ function view(state = defaultView, action){
 			state.flash.message = '';
 			state.flash.open = false;
 			return {...state}; 
+		case TAB_CHANGE_INDEX:
+			//console.log();
+			if(typeof state.tabs[action.id] !== 'undefined'){
+				state.tabs[action.id] = action.index;
+				return {...state};
+			}
+			return state;
+			 
 	}
 	return state;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main.js';
 import HomePage from './HomePage.js';
+import MainTabs from './MainTabs.js';
 import MyApps from './MyApps.js';
 import Catalog from './Catalog.js';
 import { Router, Route, hashHistory } from 'react-router'
@@ -79,7 +80,8 @@ const Routes = () => (
 	      <Route path="/" component={MyApps} onEnter={requireIntro} />
 	      <Route path="/intro" component={HomePage} />
 	      <Route path="/catalog" component={Catalog} />
-          <Route path="/myapps" component={MyApps} />
+        <Route path="/myapps" component={MyApps} />
+        <Route path="/catalogtabs" component={MainTabs} />
 	    </Route>
 	  </Router>
 	</Provider>

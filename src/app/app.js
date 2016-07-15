@@ -1,6 +1,6 @@
 (function() {
   if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/ad-service-worker.js');
+    navigator.serviceWorker.register('./ad-service-worker.js');
   }
 })();
 import React from 'react';

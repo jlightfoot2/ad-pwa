@@ -84,7 +84,7 @@ class Main extends Component {
 			      >
 			        <MenuItem primaryText="Home" containerElement={<Link to="/" />} />
               <MenuItem primaryText="Catalog" containerElement={<Link to="/catalog" />} />
-		
+		          <MenuItem primaryText="Tabbed Catalog" containerElement={<Link to="/catalogtabs" />} />
 			      </IconMenu>
 			    }
 

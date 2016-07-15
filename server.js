@@ -30,5 +30,5 @@ function serverStarted () {
   console.log('Root directory', root);
   console.log('Press Ctrl+C to exit...\n');
 }
-
-server.on('connect',serverStarted);
+serverStarted();
+server.on('connect',() => console.log('connection made'));

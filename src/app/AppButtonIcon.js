@@ -7,7 +7,7 @@ import CheckBox from 'material-ui/svg-icons/toggle/check-box';
 
 const MyCheckbox = ({id,installed,title,toggleToMyApps,flashMessage}) => {
   const color = installed ? 'green' : 'white';
-  const message = title + (installed ? ' has been removed from ': ' has been added to ') + ' your dashboard';
+  const message = title + (installed ? ' has been removed from ': ' has been added to ') + ' "My Apps"';
   var snackOpen = false;
   var onClick = () => {
        flashMessage(message);
