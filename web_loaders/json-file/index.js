@@ -1,8 +1,7 @@
 const util = require('util');
 const path = require('path');
 const fs = require('fs');
-fs.readFileSync('/etc/passwd')
-//TODO doesn't work though seems close
+
 var mime = require("mime");
 module.exports = function(source){
 	this.cacheable && this.cacheable();
@@ -17,7 +16,6 @@ module.exports = function(source){
 
     
     var icons = lastValue.icons;
-    fileLoader = require("file-loader");
     for(var i = 0; i < icons.length; i++){
        var imgPath = path.resolve(this.context+'/../'+icons[i].src);
        var mimetype = mime.lookup(imgPath);

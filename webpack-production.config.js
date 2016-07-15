@@ -4,7 +4,8 @@ const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PathRewriterPlugin = require('webpack-path-rewriter');
 const config = {
   entry: [path.join(__dirname, '/src/app/app.js')],
   // Render source-map file for final build
@@ -24,10 +25,6 @@ const config = {
     }),
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
-    // Transfer Files
-    new TransferWebpackPlugin([
-      {from: 'www'},
-    ], path.resolve(__dirname, 'src')),
     new SWPrecacheWebpackPlugin(
       {
         cacheId: 'ad-asset-cache1',
@@ -39,6 +36,7 @@ const config = {
         }],
       }
     ),
+    new PathRewriterPlugin()
   ],
   module: {
     loaders: [
@@ -50,6 +48,16 @@ const config = {
       {
         test:   /\.(png|gif|jpe?g|svg)$/i,
         loader: 'url?limit=100',
+      },
+      {
+          test: /\.css/,
+          loader: "file?name=[name]-[hash].[ext]"
+      },
+      {
+        test: /[.]html$/,
+        loader: PathRewriterPlugin.rewriteAndEmit({
+          name: '[name].html'
+        })
       }
     ],
   },

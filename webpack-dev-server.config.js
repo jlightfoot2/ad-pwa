@@ -31,10 +31,8 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
-    // Moves files
-    new TransferWebpackPlugin([
-      {from: 'www'},
-    ], path.resolve(__dirname, 'src')),
+    
+    new PathRewriterPlugin()
   ],
   module: {
     loaders: [
@@ -47,6 +45,16 @@ const config = {
       {
         test:   /\.(png|gif|jpe?g|svg)$/i,
         loader: 'url?limit=10000',
+      },
+      {
+          test: /\.css/,
+          loader: "file?name=[name]-[hash].[ext]"
+      },
+      {
+        test: /[.]html$/,
+        loader: PathRewriterPlugin.rewriteAndEmit({
+          name: '[name].html'
+        })
       }
     ],
   },
