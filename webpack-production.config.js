@@ -48,6 +48,10 @@ const config = {
       {
         test:   /\.(png|gif|jpe?g|svg)$/i,
         loader: 'url?limit=100',
+        /*
+        TODO upping limit cause images to in-line but this causes probems
+        with webpack-path-rewriter https://github.com/skozin/webpack-path-rewriter
+         */
       },
       {
           test: /\.css/,

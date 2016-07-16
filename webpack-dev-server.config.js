@@ -3,7 +3,7 @@ const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
-
+const PathRewriterPlugin = require('webpack-path-rewriter');
 
 const config = {
   // Entry points to the project
@@ -31,8 +31,8 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
-    
-    new PathRewriterPlugin()
+
+    new PathRewriterPlugin({includeHash: true})
   ],
   module: {
     loaders: [
@@ -44,7 +44,11 @@ const config = {
       },
       {
         test:   /\.(png|gif|jpe?g|svg)$/i,
-        loader: 'url?limit=10000',
+        loader: 'url?limit=100', 
+        /*
+        TODO upping limit cause images to inline but this causes probem
+        with webpack-path-rewriter https://github.com/skozin/webpack-path-rewriter
+         */
       },
       {
           test: /\.css/,
