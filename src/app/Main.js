@@ -21,9 +21,12 @@ import { Link } from 'react-router'
 import { Router, Route, hashHistory } from 'react-router'
 import AppSnackBar from './AppSnackBar.js'
 const styles = {
-  container: {
-
-  },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    padding: '10px'
+  }
 };
 
 const muiTheme = getMuiTheme({
@@ -42,9 +45,11 @@ class Main extends Component {
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.handleTitle = this.handleTitle.bind(this);
 
     this.state = {
       open: false,
+      title: ''
     };
   }
 
@@ -57,6 +62,12 @@ class Main extends Component {
   handleTouchTap() {
     this.setState({
       open: true,
+    });
+  }
+
+  handleTitle(title){
+    this.setState({
+      title: title
     });
   }
 
@@ -88,8 +99,11 @@ class Main extends Component {
 			      </IconMenu>
 			    }
 
-              title="Your Scrips" />
-              {this.props.children}
+              title={this.state.title} />
+
+
+              <div>{React.cloneElement(this.props.children, { appBarTitle: this.handleTitle, stylesRoot: styles.root })}</div>
+              
         </div>
            <AppSnackBar />
         </Paper>

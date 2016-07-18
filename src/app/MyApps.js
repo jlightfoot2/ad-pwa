@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -26,32 +26,40 @@ const styles = {
 };
 
 
- const MyApps = ({appList,removeT2App,flashMessage}) => (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={100}
-      cols={4}
-      padding={20}
-      style={styles.gridList}
-    >
-
-      <Subheader>Dashboard</Subheader>
-
-      {appList.map((tile) => (
-        <GridTile
-          key={tile.id}
-
-          onClick={() => {
-            flashMessage(tile.title+ " has been removed from \"My Apps\"");
-            removeT2App(tile.id);
-          }}
+class MyApps extends Component{
+  componentDidMount(){
+      this.props.appBarTitle && this.props.appBarTitle("My Apps");
+  }
+  render(){
+    var {appList,removeT2App,flashMessage,appBarTitle,stylesRoot} = this.props;
+    return (
+      <div style={stylesRoot}>
+        <GridList
+          cellHeight={100}
+          cols={4}
+          padding={20}
+          style={styles.gridList}
         >
-          <img src={tile.img}  />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
-);
+          {appList.map((tile) => (
+            <GridTile
+              key={tile.id}
+
+              onClick={() => {
+                alert('Launch '+ tile.title)
+                //flashMessage(tile.title+ " has been removed from \"My Apps\"");
+                //removeT2App(tile.id);
+              }}
+            >
+              <img src={tile.img}  />
+            </GridTile>
+          ))}
+        </GridList>
+      </div>
+    );
+  }
+
+
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -23,33 +23,39 @@ const styles = {
   },
 };
 
-const Catalog = ({appList,toggleToMyApps,flashMessage}) => {
+class Catalog extends Component {
+  componentDidMount(){
+      this.props.appBarTitle && this.props.appBarTitle("T2 Catalog");
+  }
+  render(){
+  var {appList,toggleToMyApps,flashMessage, appBarTitle,stylesRoot} = this.props;
+    return (
+    <div style={stylesRoot}>
+      <GridList
+        cellHeight={200}
+        style={styles.gridList}
+      >
 
-	return (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={200}
-      style={styles.gridList}
-    >
-      <Subheader>T2 Catalog</Subheader>
-      {appList.map((tile) => (
-      	
-        <GridTile
-          key={tile.id}
-           {...tile}
+        {appList.map((tile) => (
           
-          subtitle={<span>by <b>{tile.author}</b></span>}
-          
-          actionIcon={<AppButtonIcon {...tile}  />}
-        >
-          <img src={tile.img} />
+          <GridTile
+            key={tile.id}
+             {...tile}
+            
+            subtitle={<span>by <b>{tile.author}</b></span>}
+            
+            actionIcon={<AppButtonIcon {...tile}  />}
+          >
+            <img src={tile.img} />
 
-        </GridTile>
-      
-       
-      ))}
-    </GridList>
-  </div>);
+          </GridTile>
+        
+         
+        ))}
+      </GridList>
+    </div>);
+  }
+
 };
 
 const mapStateToProps = (state) => {

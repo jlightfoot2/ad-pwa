@@ -5,10 +5,18 @@ import { Link } from 'react-router'
 export default class HomePage extends React.Component {
   constructor(props){
     super(props);
+    this.props = props;
+    this.componentDidMount = this.componentDidMount.bind(this)
+  }
+
+  componentDidMount(){
+      this.props.appBarTitle("Intro");
   }
 
   render() {
+    var {stylesRoot} = this.props;
     return (
+      <div style={stylesRoot}>
   		<Card>
   			<CardTitle title="Scripts" subtitle="The Application Prescription Hub" />
   			<CardText>Intro Text
@@ -22,6 +30,7 @@ export default class HomePage extends React.Component {
   
   			</CardActions>
   		</Card>
+      </div>
     );
   }
 }

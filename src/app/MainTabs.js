@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 // From https://github.com/oliviertassinari/react-swipeable-views
 import SwipeableViews from 'react-swipeable-views';
@@ -18,35 +18,39 @@ const styles = {
   },
 };
 
-const MainTabs = ({slideIndex,handleTabChange}) => {
+class MainTabs extends Component {
+  componentDidMount(){
+      this.props.appBarTitle && this.props.appBarTitle("");
+  }
+  render(){
+   var {slideIndex,handleTabChange} = this.props;
+   const handleChange = (index) => {
+        this.props.appBarTitle(tabs[index].title)
+        handleTabChange('mainTab',index);
+    };
 
-  const handleChange = (value) => {
- 
-      handleTabChange('mainTab',value);
-  };
+ var tabs = [
+  {title: 'MyApps',ele: <MyApps {...this.props} />, i: 0},
+  {title: 'T2 Catalog',ele: <Catalog {...this.props} />,i: 1}
+  ];
+      return (
+        <div>
+          <Tabs
+            onChange={handleChange}
+            value={slideIndex}
+          >
+            {tabs.map(({title,i}) => (<Tab label={title} value={i} />))}
 
-    return (
-      <div>
-        <Tabs
-          onChange={handleChange}
-          value={slideIndex}
-        >
-          <Tab label="My Apps" value={0} />
-          <Tab label="T2 Catalog" value={1} />
-        </Tabs>
-        <SwipeableViews
-          index={slideIndex}
-          onChangeIndex={handleChange}
-        >
-          <div>
-            <MyApps />
-          </div>
-          <div style={styles.slide}>
-            <Catalog />
-          </div>
-        </SwipeableViews>
-      </div>
-    );
+          </Tabs>
+          <SwipeableViews
+            index={slideIndex}
+            onChangeIndex={handleChange}
+          >
+          {tabs.map(({ele}) => ele)}
+          </SwipeableViews>
+        </div>
+      );
+  }
 }
 
 
