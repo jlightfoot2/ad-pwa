@@ -32,13 +32,19 @@ class MyApps extends Component{
   }
   render(){
     var {appList,removeT2App,flashMessage,appBarTitle,stylesRoot} = this.props;
+
+    var cols = appList.length < 4 ? appList.length : 4;
+    var adjustedWidth =  styles.gridList.width/4 * cols
+    var gridStyles = {...styles.gridList}
+
+    gridStyles.width = adjustedWidth
     return (
       <div style={stylesRoot}>
         <GridList
           cellHeight={100}
-          cols={4}
+          cols={cols}
           padding={20}
-          style={styles.gridList}
+          style={gridStyles}
         >
           {appList.map((tile) => (
             <GridTile
