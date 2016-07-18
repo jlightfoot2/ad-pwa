@@ -26,6 +26,12 @@ const styles = {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: '10px'
+  },
+  desktop: {
+    backgroundImage: "url("+require('../images/wallpaper/cold-ocean.jpg')+")",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+
   }
 };
 
@@ -82,8 +88,9 @@ class Main extends Component {
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Paper  zDepth={2}>
-        <div style={styles.container}>
+        <Paper  zDepth={2} style={styles.container} >
+        <div style={styles.desktop}>
+
           <AppBar
 			    iconElementLeft={
 			      <IconMenu
