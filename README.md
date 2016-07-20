@@ -24,7 +24,9 @@ Note: To allow external viewing of the demo, change the following value in `webp
 
 ```
 host: 'localhost'  //Change to '0.0.0.0' for external facing server
-```
+
+## Building
+webpack --config webpack-production.config.js --progress --colors
 
 ## Description of [Webpack](http://webpack.github.io/docs/)
 
