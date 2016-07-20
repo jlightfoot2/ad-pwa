@@ -1,3 +1,6 @@
+/**
+ * This module creates action objects. Actions are "dispatched" mostly by ui and are handled by redux.
+ */
 
 export const ADD_T2APP_TO_MYAPPS_LIST = 'ADD_T2APP_TO_MYAPPS_LIST';
 export const REMOVE_APP_FROM_T2APPS_LIST = 'REMOVE_APP_FROM_T2APPS_LIST';
