@@ -1,12 +1,15 @@
-# [Material-UI](http://callemall.github.io/material-ui/) - Example Webpack Project
+# [Material-UI](http://callemall.github.io/material-ui/) - After Deployment Progressive Web App Implementation
 
-This is an example project that uses [Material-UI](http://callemall.github.io/material-ui/).
+This is an example project the demonstrates Progressive Web App capabilities including "off-lining" a web application.
+The primary tools used to implement this app are Material-UI/React, and # <a href='http://redux.js.org'><img src='https://camo.githubusercontent.com/f28b5bc7822f1b7bb28a96d8d09e7d79169248fc/687474703a2f2f692e696d6775722e636f6d2f4a65567164514d2e706e67' height='60'></a>.
+
+This is a work in progress.
 
 ## Installation
 
 After cloning the repository, install dependencies:
 ```sh
-cd <project folder>/material-ui/examples/webpack-example
+cd <project folder>
 npm install
 ```
 
