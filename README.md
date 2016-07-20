@@ -1,7 +1,8 @@
 # After Deployment Progressive Web App Implementation
 
 This is an example project the demonstrates Progressive Web App capabilities including "off-lining" a web application.
-The primary tools used to implement this app are [Material-UI](http://callemall.github.io/material-ui/) and [Redux](http://redux.js.org)
+The primary tools used to implement this app are [Material-UI](http://callemall.github.io/material-ui/), [Redux](http://redux.js.org) and 
+[Webpack](https://webpack.github.io/)
 
 This is a work in progress.
 
