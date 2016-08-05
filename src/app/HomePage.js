@@ -25,7 +25,7 @@ export default class HomePage extends React.Component {
         
   				<RaisedButton 
             containerElement={<Link to="/catalog" />}
-            linkButton={true}
+            
             primary={true} label="Get Started!" />
   
   			</CardActions>
