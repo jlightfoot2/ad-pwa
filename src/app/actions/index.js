@@ -13,6 +13,7 @@ export const MOVE_MYAPP_TO_T2APPS_LIST = 'MOVE_MYAPP_TO_T2APPS_LIST';
 export const TOGGLE_T2APP_FROM_MYAPPS_LIST = 'TOGGLE_T2APP_FROM_MYAPPS_LIST';
 
 export const USER_SEES_INTRO = 'USER_SEES_INTRO';
+export const USER_SEES_SPLASH = 'USER_SEES_SPLASH';
 export const SHOW_FLASH_MESSAGE = 'SHOW_FLASH_MESSAGE';
 export const HIDE_FLASH_MESSAGE = 'HIDE_FLASH_MESSAGE';
 export const TAB_CHANGE_INDEX = 'TAB_CHANGE_INDEX';
@@ -30,6 +31,13 @@ export const userSeesIntro = () => {
 		type: USER_SEES_INTRO
 	}
 };
+
+export const userSeesSplash = () => {
+	return {
+		type: USER_SEES_SPLASH
+	}
+};
+
 export const moveT2AppToMyApps = (id) => {
 	return {
 		type: MOVE_T2APP_TO_MYAPPS_LIST ,
