@@ -47,17 +47,14 @@ class MyApps extends Component{
           style={gridStyles}
         >
           {appList.map((tile) => (
+            <a href={tile.url}>
             <GridTile
               key={tile.id}
 
-              onClick={() => {
-                alert('Launch '+ tile.title)
-                //flashMessage(tile.title+ " has been removed from \"My Apps\"");
-                //removeT2App(tile.id);
-              }}
             >
               <img src={tile.img}  />
             </GridTile>
+            </a>
           ))}
         </GridList>
       </div>

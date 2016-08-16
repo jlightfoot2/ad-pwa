@@ -53,7 +53,7 @@ const defaultApps = [
 	    img: require('../../images/intro-pts.png'),
 	    title: 'PTS',
 	    author: 'T2',
-	    url: 'https://google.com',
+	    url: 'https://jlightfoot2.github.io/ad-pts-pwa/build/',
 	    installed: false
 	},
 	{
