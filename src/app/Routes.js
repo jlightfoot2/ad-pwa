@@ -64,11 +64,19 @@ let unsubscribe = store.subscribe(() => {
 
 
 function requireIntro(nextState, replace) {
-  if (store.getState().user.stage === 0) {
-    replace({
-      pathname: '/intro',
-      state: { nextPathname: nextState.location.pathname }
-    })
+  switch(store.getState().user.stage){
+    case 0:
+      replace({
+        pathname: '/splash',
+        state: { nextPathname: nextState.location.pathname }
+      });
+      break;
+    case 1:
+      replace({
+        pathname: '/intro',
+        state: { nextPathname: nextState.location.pathname }
+      });
+      break;
   }
 }
 
@@ -79,6 +87,7 @@ const Routes = () => (
 	      {/* make them children of `App` */}
 	      <Route path="/" component={MyApps} onEnter={requireIntro} />
 	      <Route path="/intro" component={HomePage} />
+        <Route path="/splash" component={HomePage} />
 	      <Route path="/catalog" component={Catalog} />
         <Route path="/myapps" component={MyApps} />
         <Route path="/catalogtabs" component={MainTabs} />

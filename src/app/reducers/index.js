@@ -8,6 +8,7 @@ import {
 	REMOVE_T2APP_FROM_MYAPPS_LIST,
 	TOGGLE_T2APP_FROM_MYAPPS_LIST,
 	USER_SEES_INTRO,
+	USER_SEES_SPLASH,
 	SHOW_FLASH_MESSAGE,
 	HIDE_FLASH_MESSAGE,
 	TAB_CHANGE_INDEX
@@ -52,7 +53,7 @@ const defaultApps = [
 	    img: require('../../images/intro-pts.png'),
 	    title: 'PTS',
 	    author: 'T2',
-	    url: 'https://google.com',
+	    url: 'https://jlightfoot2.github.io/ad-pts-pwa/build/',
 	    installed: false
 	},
 	{
@@ -169,8 +170,17 @@ const defaultUser = {
  */
 function user(state = defaultUser, action){
 	switch(action.type){
+		case USER_SEES_SPLASH:
+			if(state.stage !== 0){
+				return state
+			}
+			state.stage = 1;
+			return  {...state};
 		case USER_SEES_INTRO:
-		    state.stage = 1;
+			if(state.stage !== 1){
+				return state
+			}
+			state.stage = 2;
 			return  {...state};
 	}
 	return state;

@@ -27,13 +27,11 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new SWPrecacheWebpackPlugin(
       {
-        cacheId: 'ad-asset-cache1',
+        cacheId: 'ad-pwa-asset-cache1',
         filename: 'ad-service-worker.js',
-        maximumFileSizeToCacheInBytes: 4194304,
-        runtimeCaching: [{
-          handler: 'cacheFirst',
-          urlPattern: /\.(gif|jpg|jpeg|png)$/i,
-        }],
+        maximumFileSizeToCacheInBytes: 104857600,
+        staticFileGlobs: ['build/**/*.{js,html,css,png,jpg,gif,mp4}'],
+        "stripPrefix": "build/"
       }
     ),
     new PathRewriterPlugin()
