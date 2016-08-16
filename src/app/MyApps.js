@@ -47,7 +47,7 @@ class MyApps extends Component{
           style={gridStyles}
         >
           {appList.map((tile) => (
-            <a href={tile.url}>
+            <a href={tile.url}> target="_blank"
             <GridTile
               key={tile.id}
 
