@@ -48,7 +48,8 @@ class MyApps extends Component{
         >
           {appList.map((tile) => (
 
-            <a href={tile.url}>
+            <a href={tile.url}> target="_blank"
+
             <GridTile
               key={tile.id}
 
