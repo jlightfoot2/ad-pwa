@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { toggleT2AppFromMyList, addT2AppsToMyApps ,showFlashMessage} from './actions';
+import {toggleT2AppFromMyList, showFlashMessage} from './actions';
 import IconButton from 'material-ui/IconButton';
 import CheckBox from 'material-ui/svg-icons/toggle/check-box';
 

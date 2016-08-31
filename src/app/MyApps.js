@@ -1,85 +1,95 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import AddAppIcon from 'material-ui/svg-icons/content/add-circle';
 import { connect } from 'react-redux';
-import { showFlashMessage,removeT2AppFromMyApps} from './actions';
+import { Link } from 'react-router';
+import {showFlashMessage, removeT2AppFromMyApps, tabChangeIndex} from './actions';
+import {blue500} from 'material-ui/styles/colors';
 
 const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    width: 500,
-    height: 500,
+  content: {
+    height: '100%',
+    minHeight: '400px',
     overflowY: 'auto',
-    marginBottom: 24,
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'flex-start',
+    marginTop: 10
   },
-  img: {
+  appContainer: {
+    width: '150px',
+    height: '150px',
+    textAlign: 'center',
+    color: 'white',
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'center'
+  },
+  appActionContainer: {
+    height: '110px',
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'center'
+
+  },
+  appImage: {
     width: '100px',
-    height: '100px'
+    height: '100px',
+    borderRadius: '20px'
+  },
+  appList: {
+    flex: '1 1 auto',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'center'
   }
 };
 
-
-class MyApps extends Component{
-  componentDidMount(){
-      this.props.appBarTitle && this.props.appBarTitle("My Apps");
+class MyApps extends Component {
+  componentWillMount () {
+    this.props.appBarTitle && this.props.appBarTitle('T2 Catalog');
   }
-  render(){
-    var {appList,removeT2App,flashMessage,appBarTitle,stylesRoot} = this.props;
+  render () {
+    var {appList, addApp} = this.props;
 
-    var cols = appList.length < 4 ? appList.length : 4;
-    var adjustedWidth =  styles.gridList.width/4 * cols
-    var gridStyles = {...styles.gridList}
-
-    gridStyles.width = adjustedWidth
     return (
-      <div style={stylesRoot}>
-        <GridList
-          cellHeight={100}
-          cols={cols}
-          padding={20}
-          style={gridStyles}
-        >
-          {appList.map((tile) => (
+      <div style={styles.content}>
 
-            <a href={tile.url}> target="_blank"
-
-            <GridTile
-              key={tile.id}
-
-            >
-              <img src={tile.img}  />
-            </GridTile>
-            </a>
+          {appList.map((tile, i) => (
+              <div key={i + 1} style={styles.appContainer}>
+                <div>
+                  <a href={tile.url} target='_blank'>
+                  <img style={styles.appImage} src={tile.img} />
+                  </a>
+                </div>
+                <div>
+                  <span>{tile.title}</span>
+                </div>
+              </div>
           ))}
-        </GridList>
+
+          <div style={styles.appActionContainer}>
+              <AddAppIcon onClick={() => (addApp())} style={{width: '50px', height: '50px'}} color={blue500} />
+          </div>
+
       </div>
     );
   }
-
-
 };
 
 const mapStateToProps = (state) => {
   return {
-    appList: state.myAppIds.map((v) => state.apps[v+""])
-  }
-}
+    appList: state.myAppIds.map((v) => state.apps[v + ''])
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeT2App: (id) => {
-      dispatch(removeT2AppFromMyApps(id))
-    },
-    flashMessage: (text) => dispatch(showFlashMessage(text))
-  }
-}
+    removeT2App: (id) => dispatch(removeT2AppFromMyApps(id)),
+    flashMessage: (text) => dispatch(showFlashMessage(text)),
+    addApp: (id, index) => dispatch(tabChangeIndex('mainTab', 1))
+  };
+};
 
 export default connect(
   mapStateToProps,

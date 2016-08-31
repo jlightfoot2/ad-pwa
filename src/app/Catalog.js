@@ -5,71 +5,66 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 
 import { connect } from 'react-redux';
-import { toggleT2AppFromMyList, addT2AppsToMyApps ,showFlashMessage} from './actions';
-import { List, Map } from 'immutable';
+import {toggleT2AppFromMyList, showFlashMessage} from './actions';
+import { Map } from 'immutable';
 import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
   gridList: {
-    width: 500,
-    height: 500,
     overflowY: 'auto',
-    marginBottom: 24,
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'flex-start'
   },
+  content: {
+
+  }
 };
 
 class Catalog extends Component {
-  componentDidMount(){
-      this.props.appBarTitle && this.props.appBarTitle("T2 Catalog");
+  componentWillMount () {
+    this.props.appBarTitle && this.props.appBarTitle('T2 Catalog');
   }
-  render(){
-  var {appList,toggleToMyApps,flashMessage, appBarTitle,stylesRoot} = this.props;
+  render () {
+    var {appList, device} = this.props;
+    var cols = device.size === 'small' ? 2 : 4;
     return (
-    <div style={stylesRoot}>
-      <GridList
-        cellHeight={200}
-        style={styles.gridList}
-      >
+            <GridList
+              cellHeight={200}
+              style={styles.gridList}
+              cols={cols}
+            >
 
-        {appList.map((tile) => (
-          
-          <GridTile
-            key={tile.id}
-             {...tile}
-            
-            subtitle={<span>by <b>{tile.author}</b></span>}
-            
-            actionIcon={<AppButtonIcon {...tile}  />}
-          >
-            <img src={tile.img} />
+              {appList.map((tile) => (
+                <GridTile
+                  key={tile.id}
+                  {...tile}
+                  subtitle={<span>by <b>{tile.author}</b></span>}
+                  actionIcon={<AppButtonIcon {...tile} />}
+                >
+                  <img src={tile.img} />
 
-          </GridTile>
-        
-         
-        ))}
-      </GridList>
-    </div>);
+                </GridTile>
+              ))}
+            </GridList>
+          );
   }
 
 };
 
 const mapStateToProps = (state) => {
   return {
-    appList: Map(state.apps).toArray()
-  }
-}
+    appList: Map(state.apps).toArray(),
+    device: state.device
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleToMyApps: (id) => dispatch(toggleT2AppFromMyList(id)),
     flashMessage: (text) => dispatch(showFlashMessage(text))
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
