@@ -3,35 +3,30 @@
  * which incorporates components provided by Material-UI.
  */
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
+
 import {deepOrange500} from 'material-ui/styles/colors';
-import FlatButton from 'material-ui/FlatButton';
+
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
+
 import AppBar from 'material-ui/AppBar';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MoreHorizIcon from 'material-ui/svg-icons/navigation/more-horiz';
+
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
-import { Link } from 'react-router'
-import { Router, Route, hashHistory } from 'react-router'
-import AppSnackBar from './AppSnackBar.js'
+import {Link} from 'react-router';
+import AppSnackBar from './AppSnackBar.js';
 const styles = {
-  root: {
+  content: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    padding: '10px'
+    flexFlow: 'row wrap',
+    justifyContent: 'center'
   },
   desktop: {
     backgroundImage: "url("+require('../images/wallpaper/cold-ocean.jpg')+")",
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-
+    backgroundPosition: 'center'
   }
 };
 
@@ -41,12 +36,12 @@ const muiTheme = getMuiTheme({
     primary2Color: '#315B85',
     accent1Color: '#DEA326',
     accent2Color: '#DEA326',
-    accent3Color: '#DEA326',
-  },
+    accent3Color: '#DEA326'
+  }
 });
 
 class Main extends Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -59,61 +54,32 @@ class Main extends Component {
     };
   }
 
-  handleRequestClose() {
+  handleRequestClose () {
     this.setState({
-      open: false,
+      open: false
     });
   }
 
-  handleTouchTap() {
+  handleTouchTap () {
     this.setState({
-      open: true,
+      open: true
     });
   }
 
-  handleTitle(title){
+  handleTitle (title) {
     this.setState({
       title: title
     });
   }
 
-  render() {
-    const standardActions = (
-      <FlatButton
-        label="Ok"
-        primary={true}
-        onTouchTap={this.handleRequestClose}
-      />
-    );
-
+  render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Paper  zDepth={2} style={styles.container} >
         <div style={styles.desktop}>
-
-          <AppBar
-			    iconElementLeft={
-			      <IconMenu
-			        iconButtonElement={
-			          <IconButton><MenuIcon /></IconButton>
-			        }
-			        targetOrigin={{horizontal: 'left', vertical: 'top'}}
-			        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-			      >
-			        <MenuItem primaryText="Home" containerElement={<Link to="/" />} />
-              <MenuItem primaryText="Catalog" containerElement={<Link to="/catalog" />} />
-		          <MenuItem primaryText="Tabbed Catalog" containerElement={<Link to="/catalogtabs" />} />
-			      </IconMenu>
-			    }
-
-              title={this.state.title} />
-
-
-              <div>{React.cloneElement(this.props.children, { appBarTitle: this.handleTitle, stylesRoot: styles.root })}</div>
-              
+          <AppBar title={this.state.title} />
+          <div style={styles.content}>{React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}</div>
+          <AppSnackBar />
         </div>
-           <AppSnackBar />
-        </Paper>
       </MuiThemeProvider>
     );
   }

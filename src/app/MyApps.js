@@ -1,23 +1,16 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+
 import { connect } from 'react-redux';
-import { showFlashMessage,removeT2AppFromMyApps} from './actions';
+import {showFlashMessage, removeT2AppFromMyApps} from './actions';
 
 const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
   gridList: {
     width: 500,
     height: 500,
     overflowY: 'auto',
-    marginBottom: 24,
+    marginBottom: 24
   },
   img: {
     width: '100px',
@@ -25,34 +18,29 @@ const styles = {
   }
 };
 
-
 class MyApps extends Component{
-  componentDidMount(){
-      this.props.appBarTitle && this.props.appBarTitle("My Apps");
+  componentWillMount () {
+    this.props.appBarTitle && this.props.appBarTitle("T2 Catalog");
   }
-  render(){
-    var {appList,removeT2App,flashMessage,appBarTitle,stylesRoot} = this.props;
+  render () {
+    var {appList} = this.props;
 
     var cols = appList.length < 4 ? appList.length : 4;
-    var adjustedWidth =  styles.gridList.width/4 * cols
-    var gridStyles = {...styles.gridList}
-
-    gridStyles.width = adjustedWidth
     return (
-      <div style={stylesRoot}>
+      <div>
         <GridList
           cellHeight={100}
           cols={cols}
           padding={20}
-          style={gridStyles}
+          style={styles.gridList}
         >
           {appList.map((tile) => (
-            <a href={tile.url}> target="_blank"
+            <a href={tile.url} target="_blank">
             <GridTile
               key={tile.id}
 
             >
-              <img src={tile.img}  />
+              <img src={tile.img} />
             </GridTile>
             </a>
           ))}
@@ -60,15 +48,13 @@ class MyApps extends Component{
       </div>
     );
   }
-
-
 };
 
 const mapStateToProps = (state) => {
   return {
     appList: state.myAppIds.map((v) => state.apps[v+""])
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -76,8 +62,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(removeT2AppFromMyApps(id))
     },
     flashMessage: (text) => dispatch(showFlashMessage(text))
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,

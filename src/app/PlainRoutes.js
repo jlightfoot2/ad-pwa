@@ -62,16 +62,65 @@ let unsubscribe = store.subscribe(() => {
  */
 
 
-const Routes = () => (
-	<Provider store={store}>
-	  <Router history={history}>
-	    <Route component={Main}>
-	      {/* make them children of `App` */}
-	      <Route path="/" component={HomePage} />
-        <Route path="/apps" component={MainTabs} />
-	    </Route>
-	  </Router>
-	</Provider>
-);
 
-export default Routes
+function requireIntro(nextState, replace) {
+  switch(store.getState().user.stage){
+    case 0:
+      replace({
+        pathname: '/splash',
+        state: { nextPathname: nextState.location.pathname }
+      });
+      break;
+    case 1:
+      replace({
+        pathname: '/intro',
+        state: { nextPathname: nextState.location.pathname }
+      });
+      break;
+  }
+}
+
+const rootRoute = [
+  {
+    getComponent (nextState, cb) {
+      cb(null, BlankPage);
+    },
+    childRoutes: [
+      require('./routes/quickLoadRoute.js').default,
+      require('./routes/mainPageRoute.js').default
+    ]
+  }
+];
+
+export default class AppProvider extends React.Component {
+
+  constructor () {
+    super();
+    this.state = { rehydrated: false };
+  }
+
+  componentWillMount () {
+    persistStore(store, {}, () => {
+      setTimeout(() => {
+        this.setState({ rehydrated: true });
+      }, 1000);
+    });
+  }
+  componentDidMount () {
+    setTimeout(() => {
+      console.log(window.innerWidth, window.innerHeight);
+      //windowResize(window.innerWidth, window.innerHeight);
+    }, 500);
+  }
+
+  render () {
+    if (!this.state.rehydrated) {
+      return <BlankPage><SplashPage/></BlankPage>;
+    }
+    return (
+      <Provider store={store}>
+        <Router history={history} routes={rootRoute} />
+      </Provider>
+    );
+  }
+}
