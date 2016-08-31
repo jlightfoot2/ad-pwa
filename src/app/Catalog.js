@@ -11,8 +11,6 @@ import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-    width: 500,
-    height: 500,
     overflowY: 'auto',
     marginBottom: 24
   }
@@ -29,6 +27,7 @@ class Catalog extends Component {
       <GridList
         cellHeight={200}
         style={styles.gridList}
+        cols={4}
       >
 
         {appList.map((tile) => (

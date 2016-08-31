@@ -26,7 +26,8 @@ const styles = {
   desktop: {
     backgroundImage: "url("+require('../images/wallpaper/cold-ocean.jpg')+")",
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    minHeight: '400px'
   }
 };
 
@@ -77,8 +78,10 @@ class Main extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.desktop}>
           <AppBar title={this.state.title} />
-          <div style={styles.content}>{React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}</div>
-          <AppSnackBar />
+          <div style={styles.content}>
+            {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}
+            <AppSnackBar />
+          </div>
         </div>
       </MuiThemeProvider>
     );

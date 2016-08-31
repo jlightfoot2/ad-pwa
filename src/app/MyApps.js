@@ -7,8 +7,6 @@ import {showFlashMessage, removeT2AppFromMyApps} from './actions';
 
 const styles = {
   gridList: {
-    width: 500,
-    height: 500,
     overflowY: 'auto',
     marginBottom: 24
   },
