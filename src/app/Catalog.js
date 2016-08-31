@@ -5,25 +5,31 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 
 import { connect } from 'react-redux';
-import { toggleT2AppFromMyList, showFlashMessage} from './actions';
+import {toggleT2AppFromMyList, showFlashMessage} from './actions';
 import { Map } from 'immutable';
 import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-    overflowY: 'auto'
+    overflowY: 'auto',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'flex-start'
+  },
+  content: {
+
   }
 };
 
 class Catalog extends Component {
   componentWillMount () {
-    this.props.appBarTitle && this.props.appBarTitle("T2 Catalog");
+    this.props.appBarTitle && this.props.appBarTitle('T2 Catalog');
   }
   render () {
     var {appList, device} = this.props;
     var cols = device.size === 'small' ? 2 : 4;
     return (
-    <div>
+
       <GridList
         cellHeight={200}
         style={styles.gridList}
@@ -42,7 +48,7 @@ class Catalog extends Component {
           </GridTile>
         ))}
       </GridList>
-    </div>);
+
   }
 
 };

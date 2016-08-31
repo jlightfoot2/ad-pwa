@@ -8,11 +8,11 @@ import {blue500} from 'material-ui/styles/colors';
 
 const styles = {
   content: {
-    display: 'flex',
-    flexFlow: 'row wrap',
     height: '100%',
     minHeight: '400px',
     overflowY: 'auto',
+    display: 'flex',
+    flexFlow: 'row wrap',
     justifyContent: 'flex-start',
     marginTop: 10
   },
@@ -29,7 +29,7 @@ const styles = {
     height: '110px',
     display: 'flex',
     flexFlow: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
 
   },
   appImage: {

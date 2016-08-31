@@ -25,7 +25,7 @@ class MainTabs extends Component {
     return (
       <div>
         <Tabs
-  
+          style={{opacity: 0.5}}
           onChange={handleChange}
           value={slideIndex}
         >
