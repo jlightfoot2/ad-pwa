@@ -23,8 +23,9 @@ class MainTabs extends Component {
       {title: 'T2 Catalog', ele: <Catalog {...this.props} />, i: 1}
     ];
     return (
-      <div style={{width: '100%'}}>
+      <div>
         <Tabs
+  
           onChange={handleChange}
           value={slideIndex}
         >
@@ -36,10 +37,7 @@ class MainTabs extends Component {
           onChangeIndex={handleChange}
         >
         {tabs.map(({ele}, i) => {
-          return <div
-                  key={i}
-                  style={{margin: '10px', display: 'flex', flexFlow: 'row wrap', justifyContent: 'center'}}
-                  >{ele}</div>;
+          return <div>{ele}</div>;
         })}
         </SwipeableViews>
       </div>

@@ -1,20 +1,18 @@
-import {combineReducers} from 'redux'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import {combineReducers} from 'redux';
+import { routerReducer } from 'react-router-redux';
+import {deviceReducer} from '../lib/device';
 
 import {
-	MOVE_T2APP_TO_MYAPPS_LIST, 
-	MOVE_MYAPP_TO_T2APPS_LIST, 
-	ADD_T2APP_TO_MYAPPS_LIST,
-	REMOVE_T2APP_FROM_MYAPPS_LIST,
-	TOGGLE_T2APP_FROM_MYAPPS_LIST,
-	USER_SEES_INTRO,
-	USER_SEES_SPLASH,
-	SHOW_FLASH_MESSAGE,
-	HIDE_FLASH_MESSAGE,
-	TAB_CHANGE_INDEX
-} from '../actions'
+  ADD_T2APP_TO_MYAPPS_LIST,
+  REMOVE_T2APP_FROM_MYAPPS_LIST,
+  TOGGLE_T2APP_FROM_MYAPPS_LIST,
+  USER_SEES_INTRO,
+  USER_SEES_SPLASH,
+  SHOW_FLASH_MESSAGE,
+  HIDE_FLASH_MESSAGE,
+  TAB_CHANGE_INDEX
+} from '../actions';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { List, Map } from 'immutable';
 
 const appitem = new Schema('appitems');
 
@@ -23,55 +21,55 @@ appitem.define({
 });
 
 /*
-* This is default view data which germane to the app ui only 
+* This is default view data which germane to the app ui only
 * and should be kept separate from rest of the state.
 */
 const defaultView = {
-	flash: {
-		message: '',
-		open: false
-	},
-	tabs: {
-		mainTab: 0
-	}
+  flash: {
+    message: '',
+    open: false
+  },
+  tabs: {
+    mainTab: 0
+  }
 };
 
-/* 
+/*
 * The data below could come from a rest server
 */
 const defaultApps = [
-	{
-		id: 1,
-	    img: require('../../images/ad_injury_topics_lg.png'),
-	    title: 'Physical Injuries',
-	    author: 'T2',	
-	    url: 'https://google.com',
-	    installed: false	
-	},
-	{
-		id: 2,
-	    img: require('../../images/intro-pts.png'),
-	    title: 'PTS',
-	    author: 'T2',
-	    url: 'https://jlightfoot2.github.io/ad-pts-pwa/build/',
-	    installed: false
-	},
-	{
-		id: 3,
-	    img: require('../../images/ad_tobacco_topics_lg.png'),
-	    title: 'Tobacco',
-	    author: 'T2',	
-	    url: 'https://google.com',
-	    installed: false	
-	},
-	{
-		id: 4,
-	    img: require('../../images/lg-icon-b2r_3.png'),
-	    title: 'Breath to Relax',
-	    author: 'T2',	
-	    url: 'https://google.com',
-	    installed: false	
-	}
+  {
+    id: 1,
+    img: require('../../images/ad_injury_topics_lg.png'),
+    title: 'Physical Injuries',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  },
+  {
+    id: 2,
+    img: require('../../images/intro-pts.png'),
+    title: 'PTS',
+    author: 'T2',
+    url: 'https://jlightfoot2.github.io/ad-pts-pwa/build/',
+    installed: false
+  },
+  {
+    id: 3,
+    img: require('../../images/ad_tobacco_topics_lg.png'),
+    title: 'Tobacco',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  },
+  {
+    id: 4,
+    img: require('../../images/lg-icon-b2r_3.png'),
+    title: 'Breath to Relax',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  }
 ];
 
 /**
@@ -79,23 +77,21 @@ const defaultApps = [
  * @type {Object}
  */
 const appTree = {
-	apps: defaultApps
-}
+  apps: defaultApps
+};
 
 /*
-* normalize function (below) will flatten hierarchical/nested data which is 
+* normalize function (below) will flatten hierarchical/nested data which is
 * the recommended way to handle data with redux
 * see https://github.com/paularmstrong/normalizr
 * see http://stackoverflow.com/questions/32135779/updating-nested-data-in-redux-store    (scroll to dan abramov's answer)
 */
-var t2apps = normalize(appTree.apps,arrayOf(appitem));
+var t2apps = normalize(appTree.apps, arrayOf(appitem));
 
-const appItems = t2apps.entities.appitems; //default app items map.
+const appItems = t2apps.entities.appitems;
 
-
-const initT2AppIds = t2apps.result; //default t2 app ids array
-const initMyAppIds = []; //default "My Apps" ids array
-
+const initT2AppIds = t2apps.result;
+const initMyAppIds = [];
 
 /**
  * Below are convenience functions to prevent mutations
@@ -107,15 +103,15 @@ const initMyAppIds = []; //default "My Apps" ids array
  * @return object A new object representing the new state
  */
 
-function updateMapItem(state,id,cb){
-	var item = state[id+""];
+function updateMapItem (state, id, cb) {
+  var item = state[id + ''];
 
-	state[id+""] = {...cb(null,item)};
-	return {...state};
+  state[id + ''] = {...cb(null, item)};
+  return {...state};
 }
 
-function arrayHasItem(arr,val){
-	return arr.indexOf(val) > -1
+function arrayHasItem (arr, val) {
+  return arr.indexOf(val) > -1;
 }
 
 /**
@@ -124,19 +120,19 @@ function arrayHasItem(arr,val){
  * @param  Any val The new value to append to the array
  * @return Array     The new array representing the new state
  */
-function arrayPush(arr,val){
-	arr.push(val);
-	return [...arr];
+function arrayPush (arr, val) {
+  arr.push(val);
+  return [...arr];
 }
 
 /**
  * Same as arrayPush but ensures no duplicates are added
  */
-function arrayPushUnique(arr,val){
-	if(!arrayHasItem(arr,val)){
-		return arrayPush(arr,val)
-	}
-	return [...arr];
+function arrayPushUnique (arr, val) {
+  if (!arrayHasItem(arr, val)) {
+    return arrayPush(arr, val);
+  }
+  return [...arr];
 }
 
 /**
@@ -145,20 +141,20 @@ function arrayPushUnique(arr,val){
  * @param  Any val The value we want to target for removal
  * @return Array     The new array representing the new state
  */
-function arrayDeleteValue(arr,val){
-	if(arrayHasItem(arr,val)){
-		arr.splice(arr.indexOf(val),1);
-	}
-	return [...arr];
+function arrayDeleteValue (arr, val) {
+  if (arrayHasItem(arr, val)) {
+    arr.splice(arr.indexOf(val), 1);
+  }
+  return [...arr];
 }
-/* 
+/*
 * The data below could come from a rest server
 */
 const defaultUser = {
-	stage: 0, //intro stage
-	role: 'anonymous',
-	firstname: '',
-	lastname: ''	
+  stage: 0, //intro stage
+  role: 'anonymous',
+  firstname: '',
+  lastname: ''  
 }
 
 /**
@@ -169,21 +165,21 @@ const defaultUser = {
  * @return object the new state or the current state
  */
 function user(state = defaultUser, action){
-	switch(action.type){
-		case USER_SEES_SPLASH:
-			if(state.stage !== 0){
-				return state
-			}
-			state.stage = 1;
-			return  {...state};
-		case USER_SEES_INTRO:
-			if(state.stage !== 1){
-				return state
-			}
-			state.stage = 2;
-			return  {...state};
-	}
-	return state;
+  switch(action.type){
+    case USER_SEES_SPLASH:
+      if(state.stage !== 0){
+        return state
+      }
+      state.stage = 1;
+      return  {...state};
+    case USER_SEES_INTRO:
+      if(state.stage !== 1){
+        return state
+      }
+      state.stage = 2;
+      return  {...state};
+  }
+  return state;
 }
 /**
  * Controlls the apps state
@@ -194,20 +190,20 @@ function user(state = defaultUser, action){
  */
 function apps(state = appItems , action){
 
-	switch(action.type){
-		case REMOVE_T2APP_FROM_MYAPPS_LIST:
-			return updateMapItem(state,action.id,function(err,item){
-				item.installed = false;
-				return item
-			});
-		case TOGGLE_T2APP_FROM_MYAPPS_LIST:
-			return updateMapItem(state,action.id,function(err,item){
-				item.installed = !item.installed;
-				return item
-			});
-	}
+  switch(action.type){
+    case REMOVE_T2APP_FROM_MYAPPS_LIST:
+      return updateMapItem(state,action.id,function(err,item){
+        item.installed = false;
+        return item
+      });
+    case TOGGLE_T2APP_FROM_MYAPPS_LIST:
+      return updateMapItem(state,action.id,function(err,item){
+        item.installed = !item.installed;
+        return item
+      });
+  }
 
-	return state;
+  return state;
 }
 /**
  * Controlls the t2AppIds state
@@ -217,10 +213,10 @@ function apps(state = appItems , action){
  * @return Array the new state or the current state
  */
 function t2AppIds(state = initT2AppIds, action){
-	switch(action.type){
+  switch(action.type){
 
-	}
-	return state;
+  }
+  return state;
 }
 /**
  * Controlls the myAppIds state
@@ -231,15 +227,15 @@ function t2AppIds(state = initT2AppIds, action){
  */
 function myAppIds(state = initMyAppIds, action){
 
-	switch(action.type){
-		case ADD_T2APP_TO_MYAPPS_LIST:
-			return arrayPushUnique(state,action.id);
-		case TOGGLE_T2APP_FROM_MYAPPS_LIST:
-			return arrayHasItem(state,action.id) ? arrayDeleteValue(state,action.id) : arrayPushUnique(state,action.id);
-		case REMOVE_T2APP_FROM_MYAPPS_LIST:
-			return arrayDeleteValue(state,action.id);	
-	}
-	return state;
+  switch(action.type){
+    case ADD_T2APP_TO_MYAPPS_LIST:
+      return arrayPushUnique(state,action.id);
+    case TOGGLE_T2APP_FROM_MYAPPS_LIST:
+      return arrayHasItem(state,action.id) ? arrayDeleteValue(state,action.id) : arrayPushUnique(state,action.id);
+    case REMOVE_T2APP_FROM_MYAPPS_LIST:
+      return arrayDeleteValue(state,action.id);  
+  }
+  return state;
 }
 
 
@@ -248,30 +244,27 @@ function myAppIds(state = initMyAppIds, action){
  * @param Array state The view current state
  * @param Object action The action that this function may respond to
  *
- * @return Object 	The new state or the current state
+ * @return Object   The new state or the current state
  */
-function view(state = defaultView, action){
-	switch(action.type){
-		case SHOW_FLASH_MESSAGE:
-			state.flash.message = action.text;
-			state.flash.open = true;
-			return {...state}; 
-		case HIDE_FLASH_MESSAGE:
-			state.flash.message = '';
-			state.flash.open = false;
-			return {...state}; 
-		case TAB_CHANGE_INDEX:
-			//console.log();
-			if(typeof state.tabs[action.id] !== 'undefined'){
-				state.tabs[action.id] = action.index;
-				return {...state};
-			}
-			return state;
-			 
-	}
-	return state;
+function view (state = defaultView, action) {
+  switch (action.type) {
+    case SHOW_FLASH_MESSAGE:
+      state.flash.message = action.text;
+      state.flash.open = true;
+      return {...state};
+    case HIDE_FLASH_MESSAGE:
+      state.flash.message = '';
+      state.flash.open = false;
+      return {...state};
+    case TAB_CHANGE_INDEX:
+      if (typeof state.tabs[action.id] !== 'undefined') {
+        state.tabs[action.id] = action.index;
+        return {...state};
+      }
+      return state;
+  }
+  return state;
 }
-
 
 const appHub = combineReducers({
   apps,
@@ -279,7 +272,8 @@ const appHub = combineReducers({
   myAppIds,
   routing: routerReducer,
   user,
-  view
+  view,
+  device: deviceReducer
 });
 
 

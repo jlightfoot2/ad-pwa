@@ -18,16 +18,16 @@ import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import {Link} from 'react-router';
 import AppSnackBar from './AppSnackBar.js';
 const styles = {
-  content: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'center'
+  wrapper: {
+    maxWidth: '1500px',
+    margin: '0 auto 0 auto',
+    overflowY: 'auto'
   },
-  desktop: {
-    backgroundImage: "url("+require('../images/wallpaper/cold-ocean.jpg')+")",
+  content: {
+    backgroundImage: 'url(' + require('../images/wallpaper/cold-ocean.jpg') + ')',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    minHeight: '400px'
+    display: 'flex'
   }
 };
 
@@ -76,7 +76,7 @@ class Main extends Component {
   render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.desktop}>
+        <div style={styles.wrapper}>
           <AppBar title={this.state.title} />
           <div style={styles.content}>
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}

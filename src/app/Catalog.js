@@ -11,8 +11,7 @@ import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-    overflowY: 'auto',
-    marginBottom: 24
+    overflowY: 'auto'
   }
 };
 
@@ -21,13 +20,14 @@ class Catalog extends Component {
     this.props.appBarTitle && this.props.appBarTitle("T2 Catalog");
   }
   render () {
-    var {appList} = this.props;
+    var {appList, device} = this.props;
+    var cols = device.size === 'small' ? 2 : 4;
     return (
     <div>
       <GridList
         cellHeight={200}
         style={styles.gridList}
-        cols={4}
+        cols={cols}
       >
 
         {appList.map((tile) => (
@@ -49,7 +49,8 @@ class Catalog extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    appList: Map(state.apps).toArray()
+    appList: Map(state.apps).toArray(),
+    device: state.device
   };
 };
 
