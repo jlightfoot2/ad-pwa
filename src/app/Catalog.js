@@ -29,26 +29,25 @@ class Catalog extends Component {
     var {appList, device} = this.props;
     var cols = device.size === 'small' ? 2 : 4;
     return (
+            <GridList
+              cellHeight={200}
+              style={styles.gridList}
+              cols={cols}
+            >
 
-      <GridList
-        cellHeight={200}
-        style={styles.gridList}
-        cols={cols}
-      >
+              {appList.map((tile) => (
+                <GridTile
+                  key={tile.id}
+                  {...tile}
+                  subtitle={<span>by <b>{tile.author}</b></span>}
+                  actionIcon={<AppButtonIcon {...tile} />}
+                >
+                  <img src={tile.img} />
 
-        {appList.map((tile) => (
-          <GridTile
-            key={tile.id}
-            {...tile}
-            subtitle={<span>by <b>{tile.author}</b></span>}
-            actionIcon={<AppButtonIcon {...tile} />}
-          >
-            <img src={tile.img} />
-
-          </GridTile>
-        ))}
-      </GridList>
-
+                </GridTile>
+              ))}
+            </GridList>
+          );
   }
 
 };
