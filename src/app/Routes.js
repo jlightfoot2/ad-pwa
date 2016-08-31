@@ -10,9 +10,9 @@ import {createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import appHub from './reducers';
 import {syncHistoryWithStore} from 'react-router-redux';
-import {persistStore, autoRehydrate} from 'redux-persist'
+import {persistStore, autoRehydrate} from 'redux-persist';
 import localForage from 'localForage';
-import {deviceMiddleware, deviceActions} from './lib/device';
+import {deviceMiddleware} from './lib/device';
 
 let store = createStore(appHub, applyMiddleware(deviceMiddleware), autoRehydrate());
 const history = syncHistoryWithStore(hashHistory, store);
@@ -21,16 +21,37 @@ persistStore(store);
 store.subscribe(() => {
   console.log(store.getState());
 });
-const Routes = () => (
-  <Provider store={store}>
-    <Router history={history}>
-      <Route component={Main}>
-        {/* make them children of `App` */}
-        <Route path="/" component={HomePage} />
-        <Route path="/apps" component={MainTabs} />
-      </Route>
-    </Router>
-  </Provider>
-);
 
-export default Routes
+class AppProvider extends React.Component {
+
+  constructor () {
+    super();
+    this.state = { rehydrated: false };
+  }
+
+  componentWillMount () {
+    persistStore(store, {}, () => {
+      this.setState({ rehydrated: true });
+    });
+  }
+
+  render () {
+    if (!this.state.rehydrated) {
+      return <div>Loading...</div>;
+    }
+    return (
+      <Provider store={store}>
+        <Router history={history}>
+          <Route component={Main}>
+            {/* make them children of `App` */}
+            <Route path="/" component={HomePage} />
+            <Route path="/apps" component={MainTabs} />
+          </Route>
+        </Router>
+      </Provider>
+    );
+  }
+}
+
+export default AppProvider;
+

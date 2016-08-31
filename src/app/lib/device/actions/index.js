@@ -8,3 +8,7 @@ export const windowResize = (width, height = 0) => {
     height
   };
 };
+
+export default {
+  windowResize
+};

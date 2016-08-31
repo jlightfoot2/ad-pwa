@@ -17,6 +17,10 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import {Link} from 'react-router';
 import AppSnackBar from './AppSnackBar.js';
+import { connect } from 'react-redux';
+import {deviceActions} from './lib/device';
+var {windowResize} = deviceActions;
+
 const styles = {
   wrapper: {
     maxWidth: '1500px',
@@ -54,7 +58,10 @@ class Main extends Component {
       title: ''
     };
   }
-
+  componentWillMount () {
+    console.log(window.innerWidth, window.innerHeight);
+    this.props.dispatch(windowResize(window.innerWidth, window.innerHeight));
+  }
   handleRequestClose () {
     this.setState({
       open: false
@@ -88,4 +95,11 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(
+  () => ({}),
+  (dispatch, ownProps) => {
+    return {
+      dispatch: dispatch
+    };
+  }
+  )(Main);
