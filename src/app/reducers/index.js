@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import { routerReducer } from 'react-router-redux';
-import {deviceReducer} from '../lib/device';
+import {deviceReducer} from 'local-t2-device-redux';
 
 import {
   ADD_T2APP_TO_MYAPPS_LIST,
@@ -275,6 +275,5 @@ const appHub = combineReducers({
   view,
   device: deviceReducer
 });
-
 
 export default appHub

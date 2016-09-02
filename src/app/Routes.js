@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Main.js';
 import HomePage from './HomePage.js';
-import MainTabs from './MainTabs.js';
 import MyApps from './MyApps.js';
 import Catalog from './Catalog.js';
 import { Router, Route, hashHistory } from 'react-router';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import { Provider } from 'react-redux';
 import appHub from './reducers';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import localForage from 'localForage';
-import {deviceMiddleware} from './lib/device';
+import {deviceMiddleware} from 'local-t2-device-redux';
 
-let store = createStore(appHub, applyMiddleware(deviceMiddleware), autoRehydrate());
+let store = createStore(appHub,
+  applyMiddleware(deviceMiddleware)
+  , autoRehydrate());
 const history = syncHistoryWithStore(hashHistory, store);
 persistStore(store);
 
@@ -45,7 +46,8 @@ class AppProvider extends React.Component {
           <Route component={Main}>
             {/* make them children of `App` */}
             <Route path="/" component={HomePage} />
-            <Route path="/apps" component={MainTabs} />
+            <Route path="/apps" component={MyApps} />
+            <Route path="/catalog" component={Catalog} />
           </Route>
         </Router>
       </Provider>

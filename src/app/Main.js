@@ -10,15 +10,15 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import AppBar from 'material-ui/AppBar';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton/IconButton';
 
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+import IconButton from 'material-ui/IconButton/IconButton';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+
 import {Link} from 'react-router';
 import AppSnackBar from './AppSnackBar.js';
 import { connect } from 'react-redux';
-import {deviceActions} from './lib/device';
+import {deviceActions} from 'local-t2-device-redux';
 var {windowResize} = deviceActions;
 
 const styles = {
@@ -31,7 +31,8 @@ const styles = {
     backgroundImage: 'url(' + require('../images/wallpaper/cold-ocean.jpg') + ')',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    display: 'flex'
+    display: 'flex',
+    height: '100%'
   }
 };
 
@@ -81,10 +82,15 @@ class Main extends Component {
   }
 
   render () {
+    var {device} = this.props;
+    var wrapper = {...styles.wrapper,height: device.height};
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.wrapper}>
-          <AppBar title={this.state.title} />
+        <div style={wrapper}>
+          <AppBar title={this.state.title}
+            titleStyle={{textAlign: 'center'}}
+            iconElementLeft={<IconButton><ArrowBack /></IconButton>}
+          />
           <div style={styles.content}>
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}
             <AppSnackBar />
@@ -96,7 +102,9 @@ class Main extends Component {
 }
 
 export default connect(
-  () => ({}),
+  (state) => ({
+    device: state.device
+  }),
   (dispatch, ownProps) => {
     return {
       dispatch: dispatch

@@ -7,12 +7,19 @@ const PathRewriterPlugin = require('webpack-path-rewriter');
 
 const config = {
   // Entry points to the project
+
   entry: [
     'babel-polyfill',
     'webpack/hot/dev-server',
     'webpack/hot/only-dev-server',
     path.join(__dirname, '/src/app/app.js')
   ],
+  resolve: {
+    root: path.resolve(__dirname),
+    alias: {
+      'local-t2-device-redux': 'src/lib/local-t2-device-redux/index.js'
+    }
+  },
   // Server Configuration options
   devServer: {
     contentBase: 'src/www', // Relative directory for base of server
