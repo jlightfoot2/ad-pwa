@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
-const TransferWebpackPlugin = require('transfer-webpack-plugin');
+
 const PathRewriterPlugin = require('webpack-path-rewriter');
 
 const config = {
@@ -17,7 +17,8 @@ const config = {
   resolve: {
     root: path.resolve(__dirname),
     alias: {
-      'local-t2-device-redux': 'src/lib/local-t2-device-redux/index.js'
+      'local-t2-device-redux': 'src/lib/local-t2-device-redux/index.js',
+      'local-t2-navigation-redux': 'src/lib/local-t2-navigation-redux/index.js'
     }
   },
   // Server Configuration options

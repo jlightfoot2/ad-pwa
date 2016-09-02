@@ -14,7 +14,7 @@ import AppBar from 'material-ui/AppBar';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import IconButton from 'material-ui/IconButton/IconButton';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
-
+import AppBarMenuIcon from './AppBarMenuIcon.js';
 import {Link} from 'react-router';
 import AppSnackBar from './AppSnackBar.js';
 import { connect } from 'react-redux';
@@ -60,7 +60,6 @@ class Main extends Component {
     };
   }
   componentWillMount () {
-    console.log(window.innerWidth, window.innerHeight);
     this.props.dispatch(windowResize(window.innerWidth, window.innerHeight));
   }
   handleRequestClose () {
@@ -89,7 +88,7 @@ class Main extends Component {
         <div style={wrapper}>
           <AppBar title={this.state.title}
             titleStyle={{textAlign: 'center'}}
-            iconElementLeft={<IconButton><ArrowBack /></IconButton>}
+            iconElementLeft={<AppBarMenuIcon />}
           />
           <div style={styles.content}>
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}

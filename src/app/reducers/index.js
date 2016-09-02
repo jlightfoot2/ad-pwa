@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import { routerReducer } from 'react-router-redux';
 import {deviceReducer} from 'local-t2-device-redux';
-
+import {navigationReducer} from 'local-t2-navigation-redux';
 import {
   ADD_T2APP_TO_MYAPPS_LIST,
   REMOVE_T2APP_FROM_MYAPPS_LIST,
@@ -151,11 +151,11 @@ function arrayDeleteValue (arr, val) {
 * The data below could come from a rest server
 */
 const defaultUser = {
-  stage: 0, //intro stage
+  stage: 0,
   role: 'anonymous',
   firstname: '',
-  lastname: ''  
-}
+  lastname: ''
+};
 
 /**
  * Controlls the user state
@@ -273,7 +273,8 @@ const appHub = combineReducers({
   routing: routerReducer,
   user,
   view,
-  device: deviceReducer
+  device: deviceReducer,
+  navigation: navigationReducer
 });
 
-export default appHub
+export default appHub;

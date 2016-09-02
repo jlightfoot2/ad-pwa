@@ -12,9 +12,11 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import localForage from 'localForage';
 import {deviceMiddleware} from 'local-t2-device-redux';
+import {navigationCreateMiddleware} from 'local-t2-navigation-redux';
+import navigationConfig from './navigationConfig';
 
 let store = createStore(appHub,
-  applyMiddleware(deviceMiddleware)
+  applyMiddleware(deviceMiddleware, navigationCreateMiddleware(navigationConfig))
   , autoRehydrate());
 const history = syncHistoryWithStore(hashHistory, store);
 persistStore(store);
