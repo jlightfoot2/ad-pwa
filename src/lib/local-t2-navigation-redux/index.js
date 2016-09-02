@@ -20,10 +20,6 @@ const navigationCreateMiddleware = treeRaw => {
   return store => next => {
     store.dispatch(init(config));
     return action => {
-      if (firstLoad) {
-        firstLoad = false;
-        store.dispatch(init(config));
-      }
       return next(action);
     };
   };
