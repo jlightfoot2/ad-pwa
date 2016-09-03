@@ -19,7 +19,6 @@ let store = createStore(appHub,
   applyMiddleware(deviceMiddleware, navigationCreateMiddleware(navigationConfig))
   , autoRehydrate());
 const history = syncHistoryWithStore(hashHistory, store);
-persistStore(store);
 
 store.subscribe(() => {
   console.log(store.getState());
@@ -33,7 +32,7 @@ class AppProvider extends React.Component {
   }
 
   componentWillMount () {
-    persistStore(store, {}, () => {
+    persistStore(store, {keyPrefix: 'reduxPresistAd'}, () => {
       this.setState({ rehydrated: true });
     });
   }
