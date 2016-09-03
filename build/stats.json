@@ -4,7 +4,7 @@
     "./~/localForage/dist/localforage.js\nCritical dependencies:\n7:484-491 This seems to be a pre-built javascript file. Though this is possible, it's not recommended. Try to require the original source to get better results.\n @ ./~/localForage/dist/localforage.js 7:484-491"
   ],
   "version": "1.13.2",
-  "hash": "389acd818d4e58c1c5ea",
+  "hash": "7e65bb3fc8768cd6d0d5",
   "publicPath": "",
   "assetsByChunkName": {
     "main": [
@@ -69,7 +69,7 @@
     },
     {
       "name": "app.js",
-      "size": 697947,
+      "size": 697951,
       "chunks": [
         0
       ],
@@ -79,7 +79,7 @@
     },
     {
       "name": "app.js.map",
-      "size": 4980347,
+      "size": 4980334,
       "chunks": [
         0
       ],
@@ -95,7 +95,7 @@
       "initial": true,
       "entry": true,
       "extraAsync": false,
-      "size": 1870696,
+      "size": 1870685,
       "names": [
         "main"
       ],
@@ -103,7 +103,7 @@
         "app.js",
         "app.js.map"
       ],
-      "hash": "ab4bf18570fd46342b2e",
+      "hash": "36b2cfcaeb16aed7bd0c",
       "parents": [],
       "origins": [
         {
@@ -11592,7 +11592,7 @@
       "name": "./src/app/Routes.js",
       "index": 179,
       "index2": 588,
-      "size": 4885,
+      "size": 4874,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -11616,7 +11616,7 @@
           "loc": "13:14-33"
         }
       ],
-      "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = require('react-dom');\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _Main = require('./Main.js');\n\nvar _Main2 = _interopRequireDefault(_Main);\n\nvar _HomePage = require('./HomePage.js');\n\nvar _HomePage2 = _interopRequireDefault(_HomePage);\n\nvar _MyApps = require('./MyApps.js');\n\nvar _MyApps2 = _interopRequireDefault(_MyApps);\n\nvar _Catalog = require('./Catalog.js');\n\nvar _Catalog2 = _interopRequireDefault(_Catalog);\n\nvar _reactRouter = require('react-router');\n\nvar _redux = require('redux');\n\nvar _reactRedux = require('react-redux');\n\nvar _reducers = require('./reducers');\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _reactRouterRedux = require('react-router-redux');\n\nvar _reduxPersist = require('redux-persist');\n\nvar _localForage = require('localForage');\n\nvar _localForage2 = _interopRequireDefault(_localForage);\n\nvar _localT2DeviceRedux = require('local-t2-device-redux');\n\nvar _localT2NavigationRedux = require('local-t2-navigation-redux');\n\nvar _navigationConfig = require('./navigationConfig');\n\nvar _navigationConfig2 = _interopRequireDefault(_navigationConfig);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_localT2DeviceRedux.deviceMiddleware, (0, _localT2NavigationRedux.navigationCreateMiddleware)(_navigationConfig2.default)), (0, _reduxPersist.autoRehydrate)());\nvar history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, store);\n(0, _reduxPersist.persistStore)(store);\n\nstore.subscribe(function () {\n  console.log(store.getState());\n});\n\nvar AppProvider = function (_React$Component) {\n  _inherits(AppProvider, _React$Component);\n\n  function AppProvider() {\n    _classCallCheck(this, AppProvider);\n\n    var _this = _possibleConstructorReturn(this, (AppProvider.__proto__ || Object.getPrototypeOf(AppProvider)).call(this));\n\n    _this.state = { rehydrated: false };\n    return _this;\n  }\n\n  _createClass(AppProvider, [{\n    key: 'componentWillMount',\n    value: function componentWillMount() {\n      var _this2 = this;\n\n      (0, _reduxPersist.persistStore)(store, {}, function () {\n        _this2.setState({ rehydrated: true });\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      if (!this.state.rehydrated) {\n        return _react2.default.createElement(\n          'div',\n          null,\n          'Loading...'\n        );\n      }\n      return _react2.default.createElement(\n        _reactRedux.Provider,\n        { store: store },\n        _react2.default.createElement(\n          _reactRouter.Router,\n          { history: history },\n          _react2.default.createElement(\n            _reactRouter.Route,\n            { component: _Main2.default },\n            _react2.default.createElement(_reactRouter.Route, { path: '/', component: _HomePage2.default }),\n            _react2.default.createElement(_reactRouter.Route, { path: '/apps', component: _MyApps2.default }),\n            _react2.default.createElement(_reactRouter.Route, { path: '/catalog', component: _Catalog2.default })\n          )\n        )\n      );\n    }\n  }]);\n\n  return AppProvider;\n}(_react2.default.Component);\n\nexports.default = AppProvider;"
+      "source": "'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = require('react');\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = require('react-dom');\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _Main = require('./Main.js');\n\nvar _Main2 = _interopRequireDefault(_Main);\n\nvar _HomePage = require('./HomePage.js');\n\nvar _HomePage2 = _interopRequireDefault(_HomePage);\n\nvar _MyApps = require('./MyApps.js');\n\nvar _MyApps2 = _interopRequireDefault(_MyApps);\n\nvar _Catalog = require('./Catalog.js');\n\nvar _Catalog2 = _interopRequireDefault(_Catalog);\n\nvar _reactRouter = require('react-router');\n\nvar _redux = require('redux');\n\nvar _reactRedux = require('react-redux');\n\nvar _reducers = require('./reducers');\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nvar _reactRouterRedux = require('react-router-redux');\n\nvar _reduxPersist = require('redux-persist');\n\nvar _localForage = require('localForage');\n\nvar _localForage2 = _interopRequireDefault(_localForage);\n\nvar _localT2DeviceRedux = require('local-t2-device-redux');\n\nvar _localT2NavigationRedux = require('local-t2-navigation-redux');\n\nvar _navigationConfig = require('./navigationConfig');\n\nvar _navigationConfig2 = _interopRequireDefault(_navigationConfig);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_localT2DeviceRedux.deviceMiddleware, (0, _localT2NavigationRedux.navigationCreateMiddleware)(_navigationConfig2.default)), (0, _reduxPersist.autoRehydrate)());\nvar history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.hashHistory, store);\n\nstore.subscribe(function () {\n  console.log(store.getState());\n});\n\nvar AppProvider = function (_React$Component) {\n  _inherits(AppProvider, _React$Component);\n\n  function AppProvider() {\n    _classCallCheck(this, AppProvider);\n\n    var _this = _possibleConstructorReturn(this, (AppProvider.__proto__ || Object.getPrototypeOf(AppProvider)).call(this));\n\n    _this.state = { rehydrated: false };\n    return _this;\n  }\n\n  _createClass(AppProvider, [{\n    key: 'componentWillMount',\n    value: function componentWillMount() {\n      var _this2 = this;\n\n      (0, _reduxPersist.persistStore)(store, { keyPrefix: 'reduxPresistAd' }, function () {\n        _this2.setState({ rehydrated: true });\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      if (!this.state.rehydrated) {\n        return _react2.default.createElement(\n          'div',\n          null,\n          'Loading...'\n        );\n      }\n      return _react2.default.createElement(\n        _reactRedux.Provider,\n        { store: store },\n        _react2.default.createElement(\n          _reactRouter.Router,\n          { history: history },\n          _react2.default.createElement(\n            _reactRouter.Route,\n            { component: _Main2.default },\n            _react2.default.createElement(_reactRouter.Route, { path: '/', component: _HomePage2.default }),\n            _react2.default.createElement(_reactRouter.Route, { path: '/apps', component: _MyApps2.default }),\n            _react2.default.createElement(_reactRouter.Route, { path: '/catalog', component: _Catalog2.default })\n          )\n        )\n      );\n    }\n  }]);\n\n  return AppProvider;\n}(_react2.default.Component);\n\nexports.default = AppProvider;"
     },
     {
       "id": 180,
@@ -21512,7 +21512,7 @@
         0
       ],
       "assets": [],
-      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/IconMenu/IconMenu.js",
+      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/MenuItem/MenuItem.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
@@ -21740,7 +21740,7 @@
         0
       ],
       "assets": [],
-      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/IconMenu/IconMenu.js",
+      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/MenuItem/MenuItem.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
@@ -21982,7 +21982,7 @@
         0
       ],
       "assets": [],
-      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/IconMenu/index.js",
+      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/material-ui/MenuItem/index.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
@@ -23904,7 +23904,7 @@
         0
       ],
       "assets": [],
-      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/react-router/lib/TransitionUtils.js",
+      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/react-router/lib/getComponents.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
@@ -27931,7 +27931,7 @@
         0
       ],
       "assets": [],
-      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/lodash/_baseGet.js",
+      "issuer": "/Users/jack.lightfoot/Documents/projects/innovations/progressivewebapps/ad-pwa/node_modules/lodash/_hasPath.js",
       "failed": false,
       "errors": 0,
       "warnings": 0,
