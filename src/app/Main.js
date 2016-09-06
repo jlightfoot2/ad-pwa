@@ -81,7 +81,7 @@ class Main extends Component {
   }
 
   render () {
-    var {device} = this.props;
+    var {device, leftIconTouchTap} = this.props;
     var wrapper = {...styles.wrapper,height: device.height};
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -89,6 +89,7 @@ class Main extends Component {
           <AppBar title={this.state.title}
             titleStyle={{textAlign: 'center'}}
             iconElementLeft={<AppBarMenuIcon />}
+          
           />
           <div style={styles.content}>
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}

@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton/IconButton';
+import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
-import { Link } from 'react-router';
-const AppBarMenuIcon = ({paths, submenu, parent}) => {
+import { Link, withRouter } from 'react-router';
+
+const AppBarMenuIcon = ({paths, submenu, parent, onBackClick, router}) => {
   if (paths.current.level > 0) {
-    if (parent) {
-      return (<Link to={parent.pathname}><IconButton><ArrowBack /></IconButton></Link>);
-    }
-    return (<Link to="/home"><IconButton><ArrowBack /></IconButton></Link>);
+    return (<IconButton onTouchTap={(e) => { onBackClick(e, paths, router); }}><ArrowBack /></IconButton>);
   } else {
     return (
       <IconMenu
@@ -37,5 +35,21 @@ const mapStateToProp = (state, ownProps) => {
     parent: state.navigation.paths.parent
   };
 };
-export default connect(mapStateToProp)(AppBarMenuIcon);
+
+const dispatchToProps = (dispatch, ownProps) => {
+
+  return {
+    onBackClick: (e, paths, router) => {
+      var link = '/apps';
+      if (paths.current.level > 0) {
+        if (paths.parent) {
+          link = paths.parent.pathname;
+        }
+      }
+      console.log('onBackClick');
+      router.push(link);
+    }
+  };
+};
+export default connect(mapStateToProp, dispatchToProps)(withRouter(AppBarMenuIcon));
 
