@@ -11,13 +11,15 @@ import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-    overflowY: 'visible',
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'flex-start'
+
   },
   content: {
-
+    overflowY: 'auto',
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'flex-start',
+    alignItem: 'flex-start',
+    marginTop: 10
   }
 };
 
@@ -29,24 +31,31 @@ class Catalog extends Component {
     var {appList, cols} = this.props;
     
     return (
-            <GridList
-              cellHeight={200}
-              style={styles.gridList}
-              cols={cols}
-            >
+            <div style={styles.content}>
 
-              {appList.map((tile) => (
-                <GridTile
-                  key={tile.id}
-                  {...tile}
-                  subtitle={<span>by <b>{tile.author}</b></span>}
-                  actionIcon={<AppButtonIcon {...tile} />}
-                >
-                  <img src={tile.img} />
+              <GridList
+                cellHeight={200}
+                style={styles.gridList}
+                cols={cols}
+              >
+              
+                {appList.map((tile) => (
+                  <GridTile
+                    key={tile.id}
+                    {...tile}
+                    subtitle={<span>by <b>{tile.author}</b></span>}
+                    actionIcon={<AppButtonIcon {...tile} />}
+                  >
+                    <img src={tile.img} />
 
-                </GridTile>
-              ))}
-            </GridList>
+                  </GridTile>
+                ))}
+        
+              </GridList>
+              <div style={{flex: '2 1 100%'}}>
+
+              </div>
+            </div>
           );
   }
 
