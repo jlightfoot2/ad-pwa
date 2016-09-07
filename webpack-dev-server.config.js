@@ -68,6 +68,12 @@ const config = {
         loader: PathRewriterPlugin.rewriteAndEmit({
           name: '[name].html'
         })
+      },
+      {
+        test: /[.]ico$/,
+        loader: PathRewriterPlugin.rewriteAndEmit({
+          name: '[name].ico'
+        })
       }
     ],
   },
