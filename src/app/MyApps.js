@@ -11,18 +11,19 @@ const styles = {
     overflowY: 'auto',
     display: 'flex',
     flexFlow: 'column',
-    justifyContent: 'flex-start',
-    alignItem: 'flex-start',
-    marginTop: 10
+    justifyContent: 'space-between',
+    alignContent: 'space-between',
+    height: '100%'
   },
+
   body: {
     overflowY: 'auto',
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    marginTop: 10,
-    flex: '1 1 100%'
+    alignContent: 'flex-start'
   },
+
   appContainer: {
     width: '150px',
     height: '150px',
@@ -32,13 +33,14 @@ const styles = {
     flexFlow: 'column',
     justifyContent: 'center'
   },
-  appActionContainer: {
-    height: '110px',
-    display: 'flex',
-    flexFlow: 'column',
-    justifyContent: 'center'
 
+  appActionContainer: {
+    display: 'flex',
+    flexFlow: 'row',
+    justifyContent: 'flex-end',
+    padding: 20
   },
+
   appImage: {
     width: '100px',
     height: '100px',
@@ -48,10 +50,10 @@ const styles = {
 
 class MyApps extends Component {
   componentWillMount () {
-    this.props.appBarTitle && this.props.appBarTitle('T2 Catalog');
+    this.props.appBarTitle && this.props.appBarTitle('My Apps');
   }
   render () {
-    var {appList, addApp} = this.props;
+    var {appList} = this.props;
 
     return (
       <div style={styles.content}>
@@ -70,15 +72,14 @@ class MyApps extends Component {
                 </div>
             ))}
 
-            <div style={styles.appActionContainer}>
-                <Link to="/catalog"><AddAppIcon style={{width: '50px', height: '50px'}} color={blue500} /></Link>
-            </div>
+
 
         </div>
-        <div style={{flex: '2 1 100%'}}>
-        
+        <div style={styles.appActionContainer}>
+            <Link to="/catalog"><AddAppIcon style={{width: '50px', height: '50px'}} color={blue500} /></Link>
         </div>
       </div>
+
     );
   }
 };

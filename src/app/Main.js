@@ -24,14 +24,16 @@ var {windowResize} = deviceActions;
 const styles = {
   wrapper: {
     maxWidth: '1500px',
-    margin: '0 auto 0 auto',
     overflowY: 'auto'
   },
   content: {
+/*
     backgroundImage: 'url(' + require('../images/wallpaper/cold-ocean.jpg') + ')',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center', */
     display: 'flex',
+    justifyContent: 'flex-start',
+    flexFlow: 'column',
     height: '100%'
   }
 };
@@ -81,17 +83,19 @@ class Main extends Component {
   }
 
   render () {
-    var {device, leftIconTouchTap} = this.props;
-    var wrapper = {...styles.wrapper,height: device.height};
+    var {device} = this.props;
+    var navBarHeight = 64;
+    var wrapper = {...styles.wrapper, height: device.height};
+    var content = {...styles.content, height: device.height - navBarHeight};
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={wrapper}>
           <AppBar title={this.state.title}
             titleStyle={{textAlign: 'center'}}
             iconElementLeft={<AppBarMenuIcon />}
-          
+
           />
-          <div style={styles.content}>
+          <div style={content}>
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}
             <AppSnackBar />
           </div>
