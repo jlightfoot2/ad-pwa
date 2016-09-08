@@ -23,6 +23,13 @@ const config = {
     filename: 'app.js', // Name of output file
   },
   plugins: [
+    //http://dev.topheman.com/make-your-react-production-minified-version-with-webpack/
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+
     new webpack.optimize.CommonsChunkPlugin({
         children:  true, // Look for common dependencies in all children,
         minChunks: 2, // How many times a dependency must come up before being extracted
@@ -45,8 +52,8 @@ const config = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         // suppresses warnings, usually from module minification
-        warnings: false
-      },
+        warnings: true
+      }
     }),
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
