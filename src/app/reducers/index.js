@@ -40,7 +40,7 @@ const defaultView = {
 const defaultApps = [
   {
     id: 1,
-    img: require('../../images/ad_injury_topics_lg.png'),
+    img: require('../../images/afdep_injury_topics_lg.png'),
     title: 'Physical Injuries',
     author: 'T2',
     url: 'https://google.com',
@@ -51,12 +51,12 @@ const defaultApps = [
     img: require('../../images/intro-pts.png'),
     title: 'PTS',
     author: 'T2',
-    url: 'https://jlightfoot2.github.io/ad-pts-pwa/build/',
+    url: 'https://jlightfoot2.github.io/afdep-pts-pwa/build/',
     installed: false
   },
   {
     id: 3,
-    img: require('../../images/ad_tobacco_topics_lg.png'),
+    img: require('../../images/afdep_tobacco_topics_lg.png'),
     title: 'Tobacco',
     author: 'T2',
     url: 'https://google.com',
