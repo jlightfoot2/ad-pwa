@@ -59,6 +59,7 @@
     "redux": "^3.5.2",
     "redux-immutable": "^3.0.6",
     "redux-persist": "^3.2.2",
+    "redux-persist-migrate": "^4.0.1",
     "redux-responsive": "^3.1.0"
   }
 }

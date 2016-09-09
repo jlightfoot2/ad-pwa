@@ -11,7 +11,7 @@ import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-
+    overflowY: 'auto'
   },
   content: {
     overflowY: 'auto',
@@ -29,7 +29,7 @@ class Catalog extends Component {
   }
   render () {
     var {appList, cols} = this.props;
-    
+
     return (
             <div style={styles.content}>
 
@@ -38,19 +38,21 @@ class Catalog extends Component {
                 style={styles.gridList}
                 cols={cols}
               >
-              
-                {appList.map((tile) => (
+
+                {appList.map((tile, i) => (
                   <GridTile
                     key={tile.id}
                     {...tile}
                     subtitle={<span>by <b>{tile.author}</b></span>}
                     actionIcon={<AppButtonIcon {...tile} />}
+                    cols={1}
+                    rows={1}
                   >
                     <img src={tile.img} />
 
                   </GridTile>
                 ))}
-        
+
               </GridList>
               <div style={{flex: '2 1 100%'}}>
 
@@ -60,12 +62,21 @@ class Catalog extends Component {
   }
 
 };
+function getCols (state) {
+  switch (state.device.size) {
+    case 'medium':
+    case 'small':
+      return 2;
+    default:
+      return 4;
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
     appList: Map(state.apps).toArray(),
     device: state.device,
-    cols: state.device.size === 'small' ? 2 : 4
+    cols: getCols(state)
   };
 };
 
