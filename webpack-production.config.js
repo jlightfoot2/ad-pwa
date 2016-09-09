@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
-const TransferWebpackPlugin = require('transfer-webpack-plugin');
+
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');
+//  const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PathRewriterPlugin = require('webpack-path-rewriter');
 const config = {
   entry: [path.join(__dirname, '/src/app/app.js')],
@@ -20,19 +20,19 @@ const config = {
   // output config
   output: {
     path: buildPath, // Path of output file
-    filename: 'app.js', // Name of output file
+    filename: 'app.js' // Name of output file
   },
   plugins: [
-    //http://dev.topheman.com/make-your-react-production-minified-version-with-webpack/
+    // http://dev.topheman.com/make-your-react-production-minified-version-with-webpack/
     new webpack.DefinePlugin({
-      'process.env':{
+      'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-        children:  true, // Look for common dependencies in all children,
-        minChunks: 2, // How many times a dependency must come up before being extracted
+      children: true, // Look for common dependencies in all children,
+      minChunks: 2 // How many times a dependency must come up before being extracted
     }),
 
     // This plugin looks for similar chunks and files
@@ -46,7 +46,7 @@ const config = {
     // This plugin prevents Webpack from creating chunks
     // that would be too small to be worth loading separately
     new webpack.optimize.MinChunkSizePlugin({
-        minChunkSize: 51200, // ~50kb
+      minChunkSize: 51200 // ~50kb
     }),
     // Minify the bundle
     new webpack.optimize.UglifyJsPlugin({
@@ -63,24 +63,21 @@ const config = {
         filename: 'ad-service-worker.js',
         maximumFileSizeToCacheInBytes: 104857600,
         staticFileGlobs: [
-                          'build/manifest.json',
-                          'build/**/*.{html,css,ico}',
-                          'build/static/**/*.{png,jpg,jpeg,svg,gif,mp4,json}'
-                          ],
-        runtimeCaching: [{
-          handler: 'fastest',
-          urlPattern: /\/[\S_-]+\.(js)$/i
-        },
-        {
-          handler: 'cacheFirst',
-          urlPattern: /dynamic\/[\w_-]+\.(gif|jpg|jpeg|png|svg)$/i
-        },
-        {
-          handler: 'networkFirst',
-          urlPattern: /dynamic\/[\w_-]+\.(mp4|mp3)$/i
-        }
+          'build/manifest.json',
+          'build/**/*.{html,css,js}',
+          'build/static/**/*.{png,jpg,jpeg,svg,gif,mp4,json}'
         ],
-        "stripPrefix": "build/"
+        runtimeCaching: [
+          {
+            handler: 'cacheFirst',
+            urlPattern: /dynamic\/[\w_-]+\.(gif|jpg|jpeg|png|svg)$/i
+          },
+          {
+            handler: 'networkFirst',
+            urlPattern: /dynamic\/[\w_-]+\.(mp4|mp3)$/i
+          }
+        ],
+        'stripPrefix': 'build/'
       }
     ),
     new PathRewriterPlugin()
@@ -90,23 +87,23 @@ const config = {
       {
         test: /\.js$/, // All .js files
         loaders: ['babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
-        exclude: [nodeModulesPath],
+        exclude: [nodeModulesPath]
       },
       {
-        test:   /\.(jpe?g|png|gif|svg|ico)$/i,
-        loader: 'url?limit=100&name=static/[name]-[hash].[ext]',
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        loader: 'url?limit=100&name=static/[name]-[hash].[ext]'
         /*
         TODO upping limit cause images to in-line but this causes probems
         with webpack-path-rewriter https://github.com/skozin/webpack-path-rewriter
          */
       },
       {
-        test:   /\.(mp3|mp4)$/i,
-        loader: 'file?name=dynamic/[name]-[hash].[ext]',
+        test: /\.(mp3|mp4)$/i,
+        loader: 'file?name=dynamic/[name]-[hash].[ext]'
       },
       {
-          test: /\.css/,
-          loader: "file?name=[name]-[hash].[ext]"
+        test: /\.css/,
+        loader: 'file?name=[name]-[hash].[ext]'
       },
       {
         test: /[.]html$/,
@@ -120,8 +117,8 @@ const config = {
           name: '[name].ico'
         })
       }
-    ],
-  },
+    ]
+  }
 };
 
 module.exports = config;

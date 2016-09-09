@@ -88,7 +88,7 @@ const appTree = {
 */
 var t2apps = normalize(appTree.apps, arrayOf(appitem));
 
-const appItems = t2apps.entities.appitems;
+export const appItems = t2apps.entities.appitems;
 
 const initT2AppIds = t2apps.result;
 const initMyAppIds = [];
