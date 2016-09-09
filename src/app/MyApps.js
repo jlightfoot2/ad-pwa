@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import AddAppIcon from 'material-ui/svg-icons/content/add-circle';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import {showFlashMessage, removeT2AppFromMyApps, tabChangeIndex} from './actions';
-import {blue500} from 'material-ui/styles/colors';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 const styles = {
   content: {
@@ -38,7 +39,7 @@ const styles = {
     display: 'flex',
     flexFlow: 'row',
     justifyContent: 'flex-end',
-    padding: 20
+    padding: 40
   },
 
   appImage: {
@@ -72,11 +73,13 @@ class MyApps extends Component {
                 </div>
             ))}
 
-
-
         </div>
         <div style={styles.appActionContainer}>
-            <Link to="/catalog"><AddAppIcon style={{width: '50px', height: '50px'}} color={blue500} /></Link>
+            <Link to="/catalog">
+              <FloatingActionButton>
+                <ContentAdd />
+              </FloatingActionButton>
+            </Link>
         </div>
       </div>
 

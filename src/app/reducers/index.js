@@ -188,18 +188,23 @@ function user(state = defaultUser, action){
  *
  * @return Object the new state or the current state
  */
-function apps(state = appItems , action){
-
-  switch(action.type){
+function apps (state = appItems, action) {
+  switch (action.type) {
     case REMOVE_T2APP_FROM_MYAPPS_LIST:
-      return updateMapItem(state,action.id,function(err,item){
+      return updateMapItem(state, action.id, function (err, item) {
+        if (err) {
+          console.log(err);
+        }
         item.installed = false;
-        return item
+        return item;
       });
     case TOGGLE_T2APP_FROM_MYAPPS_LIST:
-      return updateMapItem(state,action.id,function(err,item){
+      return updateMapItem(state, action.id, function (err, item) {
+        if (err) {
+          console.log(err);
+        }
         item.installed = !item.installed;
-        return item
+        return item;
       });
   }
 
@@ -212,8 +217,8 @@ function apps(state = appItems , action){
  *
  * @return Array the new state or the current state
  */
-function t2AppIds(state = initT2AppIds, action){
-  switch(action.type){
+function t2AppIds (state = initT2AppIds, action) {
+  switch (action.type) {
 
   }
   return state;
@@ -225,19 +230,17 @@ function t2AppIds(state = initT2AppIds, action){
  *
  * @return Array the new state or the current state
  */
-function myAppIds(state = initMyAppIds, action){
-
-  switch(action.type){
+function myAppIds (state = initMyAppIds, action) {
+  switch (action.type) {
     case ADD_T2APP_TO_MYAPPS_LIST:
-      return arrayPushUnique(state,action.id);
+      return arrayPushUnique(state, action.id);
     case TOGGLE_T2APP_FROM_MYAPPS_LIST:
-      return arrayHasItem(state,action.id) ? arrayDeleteValue(state,action.id) : arrayPushUnique(state,action.id);
+      return arrayHasItem(state, action.id) ? arrayDeleteValue(state, action.id) : arrayPushUnique(state, action.id);
     case REMOVE_T2APP_FROM_MYAPPS_LIST:
-      return arrayDeleteValue(state,action.id);  
+      return arrayDeleteValue(state, action.id);
   }
   return state;
 }
-
 
 /**
  * Controlls the app view state
