@@ -56,7 +56,7 @@ import createMigration from 'redux-persist-migrate';
   }
 })();
 
-function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename
+function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename or just do one object level
   Object.keys(src).forEach(function (objId) {
     objId += '';
     var currObj = src[objId];
@@ -91,8 +91,6 @@ const history = syncHistoryWithStore(hashHistory, store);
 store.subscribe(() => {
   console.log(store.getState());
 });
-
-
 
 class AppProvider extends React.Component {
 

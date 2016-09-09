@@ -29,7 +29,7 @@ const styles = {
     width: '150px',
     height: '150px',
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
     display: 'flex',
     flexFlow: 'column',
     justifyContent: 'center'
