@@ -83,7 +83,7 @@ function parse(e){for(var t,r=[],n=0,o=0,a="";null!=(t=PATH_REGEXP.exec(e));){va
 
 
 /* eslint-disable quotes, comma-spacing */
-var PrecacheConfig = [["favicon.ico","ca4aac5341a2b707d373497c7b5de6b9"],["index.html","85fe57bd96198cad4ff66ae1b1837657"],["main-04312762f51e2ceefa7ee046a1f1e37d.css","04312762f51e2ceefa7ee046a1f1e37d"],["manifest.json","0026a507424229a61fe8c32faca20a9f"],["static/afdep_injury_topics_lg-587ab008d548857b03736ce39bd21736.png","587ab008d548857b03736ce39bd21736"],["static/afdep_tobacco_topics_lg-8f8513445f39402fbfed16ccac888b9d.png","8f8513445f39402fbfed16ccac888b9d"],["static/cold-ocean-48c30fbac1f563fc8f2c326c90acff00.jpg","48c30fbac1f563fc8f2c326c90acff00"],["static/intro-pts-b5c5d989eef545a5021cbeb6e7118dfd.png","b5c5d989eef545a5021cbeb6e7118dfd"],["static/lg-icon-b2r_3-5f7ebeee11a34da050ded5681907816c.png","5f7ebeee11a34da050ded5681907816c"],["static/star_144-a059d86c61cae9f31318d8f2cb27153f.png","a059d86c61cae9f31318d8f2cb27153f"],["static/star_152-db2e9d0b91625a1c1dd937b74a4916e2.png","db2e9d0b91625a1c1dd937b74a4916e2"]];
+var PrecacheConfig = [["app.js","2bfaf39a9dc072aa61fe9a1fb041db62"],["index.html","bc707da057c90b238db19d3a0ac9eec5"],["main-04312762f51e2ceefa7ee046a1f1e37d.css","04312762f51e2ceefa7ee046a1f1e37d"],["manifest.json","0026a507424229a61fe8c32faca20a9f"],["static/afdep_injury_topics_lg-587ab008d548857b03736ce39bd21736.png","587ab008d548857b03736ce39bd21736"],["static/afdep_tobacco_topics_lg-8f8513445f39402fbfed16ccac888b9d.png","8f8513445f39402fbfed16ccac888b9d"],["static/intro-pts-b5c5d989eef545a5021cbeb6e7118dfd.png","b5c5d989eef545a5021cbeb6e7118dfd"],["static/lg-icon-b2r_3-5f7ebeee11a34da050ded5681907816c.png","5f7ebeee11a34da050ded5681907816c"],["static/star_144-a059d86c61cae9f31318d8f2cb27153f.png","a059d86c61cae9f31318d8f2cb27153f"],["static/star_152-db2e9d0b91625a1c1dd937b74a4916e2.png","db2e9d0b91625a1c1dd937b74a4916e2"],["static/star_32-c2841233c38c89e6b77b3201cf91ad72.png","c2841233c38c89e6b77b3201cf91ad72"]];
 /* eslint-enable quotes, comma-spacing */
 var CacheNamePrefix = 'sw-precache-v1-ad-pwa-cache1-' + (self.registration ? self.registration.scope : '') + '-';
 
@@ -310,7 +310,6 @@ self.addEventListener('fetch', function(event) {
 
 // Runtime cache configuration, using the sw-toolbox library.
 
-toolbox.router.get(/\/[\S_-]+\.(js)$/i, toolbox.fastest, {});
 toolbox.router.get(/dynamic\/[\w_-]+\.(gif|jpg|jpeg|png|svg)$/i, toolbox.cacheFirst, {});
 toolbox.router.get(/dynamic\/[\w_-]+\.(mp4|mp3)$/i, toolbox.networkFirst, {});
 
