@@ -74,12 +74,13 @@ function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename or just 
   return Object.assign({}, trgt, src);
 }
 const manifest = {
-  20: (state) => (!state.apps ? state : {...state, apps: changeObjectKeys(state.apps, appItems, ['installed'])})
+  21: (state) => (!state.apps ? state : {...state, apps: undefined}),
+  22: (state) => (!state.t2AppIds ? state : {...state, t2AppIds: undefined})
 };
 
 // reducerKey is the key of the reducer you want to store the state version in
 // in this example after migrations run `state.app.version` will equal `2`
-let reducerKey = 'apps';
+let reducerKey = 'migrations';
 const migration = createMigration(manifest, reducerKey);
 const persistEnhancer = compose(migration, autoRehydrate());
 

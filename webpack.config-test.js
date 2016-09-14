@@ -1,39 +1,20 @@
+var nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 const path = require('path');
-const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
+//  const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PathRewriterPlugin = require('webpack-path-rewriter');
-
 const config = {
-  // Entry points to the project
 
-  entry: [
-    'babel-polyfill',
-    'webpack/hot/dev-server',
-    'webpack/hot/only-dev-server',
-    path.join(__dirname, '/src/app/app.js')
-  ],
+  target: 'node', // in order to ignore built-in modules like path, fs, etc.
+  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   resolve: {
     root: path.resolve(__dirname)
   },
   // Server Configuration options
-  devServer: {
-    contentBase: 'src/www', // Relative directory for base of server
-    devtool: 'eval',
-    hot: true, // Live-reload
-    inline: true,
-    port: 3000, // Port Number
-    host: '0.0.0.0' // Change to '0.0.0.0' for external facing server
-  },
-  devtool: 'eval',
-  output: {
-    path: buildPath, // Path of output file
-    filename: 'app.js'
-  },
   plugins: [
-    // Enables Hot Modules Replacement
-    new webpack.HotModuleReplacementPlugin(),
+
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
 
@@ -48,16 +29,16 @@ const config = {
         exclude: [nodeModulesPath]
       },
       {
-        test:   /\.(png|gif|jpe?g|svg)$/i,
-        loader: 'url?limit=100', 
+        test: /\.(png|gif|jpe?g|svg)$/i,
+        loader: 'url?limit=100'
         /*
         TODO upping limit cause images to inline but this causes probem
         with webpack-path-rewriter https://github.com/skozin/webpack-path-rewriter
          */
       },
       {
-          test: /\.css/,
-          loader: "file?name=[name]-[hash].[ext]"
+        test: /\.css/,
+        loader: "file?name=[name]-[hash].[ext]"
       },
       {
         test: /[.]html$/,
@@ -71,8 +52,7 @@ const config = {
           name: '[name].ico'
         })
       }
-    ],
-  },
+    ]
+  }
 };
-
 module.exports = config;
