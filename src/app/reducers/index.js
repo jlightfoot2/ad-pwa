@@ -188,7 +188,7 @@ function user(state = defaultUser, action){
  *
  * @return Object the new state or the current state
  */
-function apps (state = appItems, action) {
+export const apps = (state = appItems, action) => {
   switch (action.type) {
     case REMOVE_T2APP_FROM_MYAPPS_LIST:
       return updateMapItem(state, action.id, function (err, item) {
@@ -209,7 +209,7 @@ function apps (state = appItems, action) {
   }
 
   return state;
-}
+};
 /**
  * Controlls the t2AppIds state
  * @param Array state The t2AppIds current state
@@ -217,12 +217,12 @@ function apps (state = appItems, action) {
  *
  * @return Array the new state or the current state
  */
-function t2AppIds (state = initT2AppIds, action) {
+export const t2AppIds = (state = initT2AppIds, action) => {
   switch (action.type) {
 
   }
   return state;
-}
+};
 /**
  * Controlls the myAppIds state
  * @param Array state The myAppIds current state
@@ -230,7 +230,7 @@ function t2AppIds (state = initT2AppIds, action) {
  *
  * @return Array the new state or the current state
  */
-function myAppIds (state = initMyAppIds, action) {
+export const myAppIds = (state = initMyAppIds, action) => {
   switch (action.type) {
     case ADD_T2APP_TO_MYAPPS_LIST:
       return arrayPushUnique(state, action.id);
@@ -240,7 +240,7 @@ function myAppIds (state = initMyAppIds, action) {
       return arrayDeleteValue(state, action.id);
   }
   return state;
-}
+};
 
 /**
  * Controlls the app view state
@@ -249,7 +249,7 @@ function myAppIds (state = initMyAppIds, action) {
  *
  * @return Object   The new state or the current state
  */
-function view (state = defaultView, action) {
+export const view = (state = defaultView, action) => {
   switch (action.type) {
     case SHOW_FLASH_MESSAGE:
       state.flash.message = action.text;
@@ -267,7 +267,7 @@ function view (state = defaultView, action) {
       return state;
   }
   return state;
-}
+};
 
 const appHub = combineReducers({
   apps,
