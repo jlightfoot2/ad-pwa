@@ -10,7 +10,8 @@ import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
   gridList: {
-    overflowY: 'auto'
+    overflowY: 'auto',
+    margin: 0
   },
   content: {
     overflowY: 'auto',
