@@ -6,7 +6,6 @@ import Subheader from 'material-ui/Subheader';
 
 import { connect } from 'react-redux';
 import {toggleT2AppFromMyList, showFlashMessage} from './actions';
-import { Map } from 'immutable';
 import AppButtonIcon from './AppButtonIcon.js';
 
 const styles = {
@@ -54,9 +53,6 @@ class Catalog extends Component {
                 ))}
 
               </GridList>
-              <div style={{flex: '2 1 100%'}}>
-
-              </div>
             </div>
           );
   }
@@ -74,7 +70,9 @@ function getCols (state) {
 
 const mapStateToProps = (state) => {
   return {
-    appList: Map(state.apps).toArray(),
+    appList: state.t2AppIds.map(function (id) {
+      return {...state.apps[id], installed: state.myAppIds.indexOf(id) !== -1};
+    }),
     device: state.device,
     cols: getCols(state)
   };

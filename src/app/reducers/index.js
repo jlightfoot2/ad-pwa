@@ -69,6 +69,38 @@ const defaultApps = [
     author: 'T2',
     url: 'https://google.com',
     installed: false
+  },
+  {
+    id: 5,
+    img: require('../../images/afdep_anger_topics_lg.png'),
+    title: 'Anger',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  },
+  {
+    id: 6,
+    img: require('../../images/depression-what-is-depression.jpg'),
+    title: 'Depression',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  },
+  {
+    id: 7,
+    img: require('../../images/afdep_alcohol_topics_lg.png'),
+    title: 'Alchohol & Drugs',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
+  },
+  {
+    id: 8,
+    img: require('../../images/mtbi-what-is-tbi.jpg'),
+    title: 'Mild TBI',
+    author: 'T2',
+    url: 'https://google.com',
+    installed: false
   }
 ];
 
@@ -241,6 +273,9 @@ export const myAppIds = (state = initMyAppIds, action) => {
   }
   return state;
 };
+export const migrations = (state = {}, action) => {
+  return state;
+};
 
 /**
  * Controlls the app view state
@@ -277,7 +312,8 @@ const appHub = combineReducers({
   user,
   view,
   device: deviceReducer,
-  navigation: navigationReducer
+  navigation: navigationReducer,
+  migrations
 });
 
 export default appHub;

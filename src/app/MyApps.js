@@ -36,16 +36,20 @@ const styles = {
   },
 
   appActionContainer: {
-    display: 'flex',
-    flexFlow: 'row',
-    justifyContent: 'flex-end',
-    padding: 40
+    position: 'absolute',
+    bottom: 40,
+    textAlign: 'center',
+    width: '100%'
   },
 
   appImage: {
     width: '100px',
     height: '100px',
     borderRadius: '20px'
+  },
+
+  centeredLink: {
+    margin: '0 auto 0 auto'
   }
 };
 
@@ -75,7 +79,7 @@ class MyApps extends Component {
 
         </div>
         <div style={styles.appActionContainer}>
-            <Link to="/catalog">
+            <Link style={styles.centeredLink} to="/catalog">
               <FloatingActionButton>
                 <ContentAdd />
               </FloatingActionButton>
