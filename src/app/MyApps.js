@@ -36,10 +36,14 @@ const styles = {
   },
 
   appActionContainer: {
+
     position: 'absolute',
+    width: 60,
     bottom: 40,
-    textAlign: 'center',
-    width: '100%'
+    left: 0,
+    right: 0,
+    margin: '0 auto'
+
   },
 
   appImage: {
@@ -49,7 +53,7 @@ const styles = {
   },
 
   centeredLink: {
-    margin: '0 auto 0 auto'
+
   }
 };
 

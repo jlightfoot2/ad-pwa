@@ -27,14 +27,22 @@ const styles = {
     overflowY: 'auto'
   },
   content: {
-/*
-    backgroundImage: 'url(' + require('../images/wallpaper/cold-ocean.jpg') + ')',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center', */
     display: 'flex',
     justifyContent: 'flex-start',
     flexFlow: 'column',
     height: '100%'
+  },
+  bgDiv: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background: 'url(' + require('../images/flag.jpg') + ') center center',
+    opacity: 0.1,
+    width: '100%',
+    height: '100%',
+    zIndex: -2
   }
 };
 
@@ -90,12 +98,14 @@ class Main extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={wrapper}>
+          <div style={styles.bgDiv} />
           <AppBar title={this.state.title}
             titleStyle={{textAlign: 'center'}}
             iconElementLeft={<AppBarMenuIcon />}
 
           />
           <div style={content}>
+            
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}
             <AppSnackBar />
           </div>
