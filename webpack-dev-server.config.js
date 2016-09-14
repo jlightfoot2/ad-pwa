@@ -15,11 +15,7 @@ const config = {
     path.join(__dirname, '/src/app/app.js')
   ],
   resolve: {
-    root: path.resolve(__dirname),
-    alias: {
-      'local-t2-device-redux': 'src/lib/local-t2-device-redux/index.js',
-      'local-t2-navigation-redux': 'src/lib/local-t2-navigation-redux/index.js'
-    }
+    root: path.resolve(__dirname)
   },
   // Server Configuration options
   devServer: {
