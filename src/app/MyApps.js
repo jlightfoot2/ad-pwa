@@ -83,7 +83,7 @@ class MyApps extends Component {
       pageContent = appList.map((tile, i) => (
                         <div key={i + 1} style={styles.appContainer}>
                           <div>
-                            <a href={tile.url} target='_blank'>
+                            <a href={tile.url}>
                             <img style={styles.appImage} src={tile.img} />
                             </a>
                           </div>
