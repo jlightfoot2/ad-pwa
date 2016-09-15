@@ -57,12 +57,12 @@ const styles = {
 
   },
   messageBox: {
-    margin: 20,
+    margin: 10,
     minHeight: 50,
     padding: 20,
     textAlign: 'center',
     alignSelf: 'center',
-    flex: '0 0 auto'
+    flex: '0 1 auto'
   }
 };
 
