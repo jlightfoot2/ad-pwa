@@ -14,7 +14,7 @@ const styles = {
     display: 'flex',
     flexFlow: 'column',
     justifyContent: 'space-between',
-    alignContent: 'space-between',
+    alignContent: 'center',
     height: '100%'
   },
 
@@ -23,7 +23,7 @@ const styles = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    alignContent: 'flex-start'
+    alignContent: 'center'
   },
 
   appContainer: {
@@ -72,6 +72,8 @@ class MyApps extends Component {
   }
   render () {
     var {appList} = this.props;
+    styles.body.justifyContent = appList.length ? 'flex-start' : 'center';
+
     var pageContent = <Paper style={styles.messageBox} zDepth={2}><div>
           Your home page is empty! Add some apps using the button below.</div>
 
