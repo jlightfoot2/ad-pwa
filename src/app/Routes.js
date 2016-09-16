@@ -75,7 +75,13 @@ function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename or just 
 }
 const manifest = {
   21: (state) => (!state.apps ? state : {...state, apps: undefined}),
-  22: (state) => (!state.t2AppIds ? state : {...state, t2AppIds: undefined})
+  22: (state) => (!state.t2AppIds ? state : {...state, t2AppIds: undefined}),
+  /**
+   * Migration 23
+   *
+   * Changed link on an existing app
+   */
+  23: (state) => (!state.apps ? state : {...state, apps: undefined})
 };
 
 // reducerKey is the key of the reducer you want to store the state version in
