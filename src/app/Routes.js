@@ -81,7 +81,13 @@ const manifest = {
    *
    * Changed link on an existing app
    */
-  23: (state) => (!state.apps ? state : {...state, apps: undefined})
+  23: (state) => (!state.apps ? state : {...state, apps: undefined}),
+  /**
+   * Migration 24
+   *
+   * I think the previous migration(s) have flaw
+   */
+  24: (state) => ({...state, apps: undefined})
 };
 
 // reducerKey is the key of the reducer you want to store the state version in
