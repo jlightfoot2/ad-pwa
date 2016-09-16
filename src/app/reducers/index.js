@@ -99,7 +99,7 @@ const defaultApps = [
     img: require('../../images/mtbi-what-is-tbi.jpg'),
     title: 'Mild TBI',
     author: 'T2',
-    url: 'https://google.com',
+    url: 'https://jlightfoot2.github.io/ad-mtbi-pwa/build/',
     installed: false
   }
 ];
