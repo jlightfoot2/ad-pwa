@@ -27,7 +27,9 @@ const styles = {
   },
 
   appContainer: {
-    width: '150px',
+    minWidth: '150px',
+    minHeight: '150px',
+    width: '50%',
     height: '150px',
     textAlign: 'center',
     color: 'black',
@@ -71,9 +73,9 @@ class MyApps extends Component {
     this.props.appBarTitle && this.props.appBarTitle('My Apps');
   }
   render () {
-    var {appList} = this.props;
-    styles.body.justifyContent = appList.length ? 'flex-start' : 'center';
-
+    var {appList, device} = this.props;
+    var appItemWidth = device.size === 'small' ? '50%' : '25%';
+    var appContainer = {...styles.appContainer, width: appItemWidth};
     var pageContent = <Paper style={styles.messageBox} zDepth={2}><div>
           Your home page is empty! Add some apps using the button below.</div>
 
@@ -81,7 +83,8 @@ class MyApps extends Component {
     </Paper>;
     if (appList.length > 0) {
       pageContent = appList.map((tile, i) => (
-                        <div key={i + 1} style={styles.appContainer}>
+                   
+                        <div key={i + 1} style={appContainer}>
                           <div>
                             <a href={tile.url}>
                             <img style={styles.appImage} src={tile.img} />
@@ -91,6 +94,7 @@ class MyApps extends Component {
                             <span>{tile.title}</span>
                           </div>
                         </div>
+    
                     ));
     }
 
@@ -98,8 +102,8 @@ class MyApps extends Component {
       <div style={styles.content}>
         <div style={styles.body}>
 
-        {pageContent}
-
+          {pageContent}
+ 
         </div>
         <div style={styles.appActionContainer}>
             <Link style={styles.centeredLink} to="/catalog">
@@ -116,7 +120,8 @@ class MyApps extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    appList: state.myAppIds.map((v) => state.apps[v + ''])
+    appList: state.myAppIds.map((v) => state.apps[v + '']),
+    device: state.device
   };
 };
 

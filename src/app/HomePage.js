@@ -18,7 +18,7 @@ export default class HomePage extends React.Component {
     return (
       <div>
         <Card>
-    			<CardTitle title='Scripts' subtitle='The Application Prescription Hub' />
+    			<CardTitle title='Scripts' subtitle='The T2 Application Hub' />
     			<CardText>Intro Text
     			</CardText>
     			<CardActions>
