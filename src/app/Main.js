@@ -28,8 +28,8 @@ const styles = {
   },
   content: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    flexFlow: 'column',
+    justifyContent: 'center',
+    flexFlow: 'row',
     height: '100%'
   },
   bgDiv: {
