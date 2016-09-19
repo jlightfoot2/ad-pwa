@@ -41,7 +41,7 @@ const defaultApps = [
   {
     id: 1,
     img: require('../../images/afdep_injury_topics_lg.png'),
-    title: 'Physical Injuries',
+    title: '* Physical Injuries',
     author: 'T2',
     url: 'https://google.com',
     installed: false
@@ -57,7 +57,7 @@ const defaultApps = [
   {
     id: 3,
     img: require('../../images/afdep_tobacco_topics_lg.png'),
-    title: 'Tobacco',
+    title: '* Tobacco',
     author: 'T2',
     url: 'https://google.com',
     installed: false
@@ -65,7 +65,7 @@ const defaultApps = [
   {
     id: 4,
     img: require('../../images/lg-icon-b2r_3.png'),
-    title: 'Breath to Relax',
+    title: '* Breath to Relax',
     author: 'T2',
     url: 'https://google.com',
     installed: false
@@ -75,13 +75,13 @@ const defaultApps = [
     img: require('../../images/afdep_anger_topics_lg.png'),
     title: 'Anger',
     author: 'T2',
-    url: 'https://google.com',
+    url: 'https://jlightfoot2.github.io/ad-anger-pwa/build/',
     installed: false
   },
   {
     id: 6,
     img: require('../../images/depression-what-is-depression.jpg'),
-    title: 'Depression',
+    title: '* Depression',
     author: 'T2',
     url: 'https://google.com',
     installed: false
@@ -89,7 +89,7 @@ const defaultApps = [
   {
     id: 7,
     img: require('../../images/afdep_alcohol_topics_lg.png'),
-    title: 'Alchohol & Drugs',
+    title: '* Alchohol & Drugs',
     author: 'T2',
     url: 'https://google.com',
     installed: false
