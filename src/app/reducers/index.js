@@ -75,7 +75,7 @@ const defaultApps = [
     img: require('../../images/afdep_anger_topics_lg.png'),
     title: 'Anger',
     author: 'T2',
-    url: 'https://google.com',
+    url: 'https://jlightfoot2.github.io/ad-anger-pwa/build/',
     installed: false
   },
   {
