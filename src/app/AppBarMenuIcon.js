@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { Link, withRouter } from 'react-router';
@@ -19,11 +20,12 @@ const AppBarMenuIcon = ({paths, submenu, parent, onBackClick, router}) => {
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         anchorOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-        <MenuItem key="0" primaryText={paths.current.name} containerElement={<Link to={paths.current.pathname} />} />
+
         {submenu.map((item) => (
            <MenuItem key={item.id} primaryText={item.name} containerElement={<Link to={item.pathname} />} />
         ))}
-
+        <Divider />
+        <MenuItem disabled key="0" primaryText='v0.0.2' />
       </IconMenu>);
   }
 };
