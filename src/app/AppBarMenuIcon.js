@@ -25,7 +25,7 @@ const AppBarMenuIcon = ({paths, submenu, parent, onBackClick, router}) => {
            <MenuItem key={item.id} primaryText={item.name} containerElement={<Link to={item.pathname} />} />
         ))}
         <Divider />
-        <MenuItem disabled key="0" primaryText='v0.0.2' />
+        <MenuItem disabled key="0" primaryText='v0.0.3' />
       </IconMenu>);
   }
 };
