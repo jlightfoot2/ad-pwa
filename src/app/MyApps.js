@@ -23,8 +23,7 @@ const styles = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    alignContent: 'center',
-    marginTop: 20
+    alignContent: 'center'
   },
 
   appContainer: {
@@ -41,7 +40,7 @@ const styles = {
 
   appActionContainer: {
 
-    position: 'absolute',
+    position: 'fixed',
     width: 60,
     bottom: 40,
     left: 0,

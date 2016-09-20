@@ -92,8 +92,8 @@ class Main extends Component {
   render () {
     var {device} = this.props;
     var navBarHeight = 64;
-    var wrapper = {...styles.wrapper, height: device.height};
-    var content = {...styles.content, height: device.height - navBarHeight};
+    var wrapper = {...styles.wrapper, minHeight: device.height};
+    var content = {...styles.content, minHeight: device.height - navBarHeight};
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={wrapper}>
