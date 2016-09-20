@@ -23,7 +23,8 @@ const styles = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
-    alignContent: 'center'
+    alignContent: 'center',
+    marginTop: 20
   },
 
   appContainer: {
@@ -70,7 +71,7 @@ const styles = {
 
 class MyApps extends Component {
   componentWillMount () {
-    this.props.appBarTitle && this.props.appBarTitle('My Apps (0.0.1)');
+    this.props.appBarTitle && this.props.appBarTitle('My Apps');
   }
   render () {
     var {appList, device} = this.props;

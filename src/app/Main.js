@@ -23,7 +23,6 @@ var {windowResize} = deviceActions;
 
 const styles = {
   wrapper: {
-    maxWidth: '1500px',
     overflowY: 'auto'
   },
   content: {
@@ -100,7 +99,7 @@ class Main extends Component {
         <div style={wrapper}>
           <div style={styles.bgDiv} />
           <AppBar title={this.state.title}
-            titleStyle={{textAlign: 'center'}}
+            titleStyle={{zIndex: -1, position: 'relative', left: -20, textAlign: 'center', width: '100%'}}
             iconElementLeft={<AppBarMenuIcon />}
 
           />
