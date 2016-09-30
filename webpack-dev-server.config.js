@@ -2,12 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
-
 const PathRewriterPlugin = require('webpack-path-rewriter');
 
 const config = {
   // Entry points to the project
-
   entry: [
     'babel-polyfill',
     'webpack/hot/dev-server',
@@ -32,6 +30,10 @@ const config = {
     filename: 'app.js'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      '__DEVTOOLS__': true,
+      '__INCLUDE_SERVICE_WORKER__': false
+    }),
     // Enables Hot Modules Replacement
     new webpack.HotModuleReplacementPlugin(),
     // Allows error warnings but does not stop compiling.
@@ -48,16 +50,20 @@ const config = {
         exclude: [nodeModulesPath]
       },
       {
-        test:   /\.(png|gif|jpe?g|svg)$/i,
-        loader: 'url?limit=100', 
+        test: /\.(png|gif|jpe?g|svg)$/i,
+        loader: 'url?limit=100&name=static/[name]-[hash].[ext]'
         /*
-        TODO upping limit cause images to inline but this causes probem
+        TODO upping limit cause images to in-line but this causes probems
         with webpack-path-rewriter https://github.com/skozin/webpack-path-rewriter
          */
       },
       {
-          test: /\.css/,
-          loader: "file?name=[name]-[hash].[ext]"
+        test: /\.(mp3|mp4)$/i,
+        loader: 'file?name=dynamic/[name]-[hash].[ext]'
+      },
+      {
+        test: /\.css/,
+        loader: 'file?name=[name]-[hash].[ext]'
       },
       {
         test: /[.]html$/,
@@ -71,8 +77,8 @@ const config = {
           name: '[name].ico'
         })
       }
-    ],
-  },
+    ]
+  }
 };
 
 module.exports = config;

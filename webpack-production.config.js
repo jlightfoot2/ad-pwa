@@ -2,12 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 const buildPath = path.resolve(__dirname, 'build');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
-
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-//  const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PathRewriterPlugin = require('webpack-path-rewriter');
 const config = {
-  entry: [path.join(__dirname, '/src/app/app.js')],
+  entry: ['babel-polyfill', path.join(__dirname, '/src/app/app.js')],
   resolve: {
     root: path.resolve(__dirname)
   },
@@ -23,9 +22,9 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
-      }
+      },
+      '__DEVTOOLS__': true
     }),
-
     new webpack.optimize.CommonsChunkPlugin({
       children: true, // Look for common dependencies in all children,
       minChunks: 2 // How many times a dependency must come up before being extracted
@@ -44,6 +43,7 @@ const config = {
     new webpack.optimize.MinChunkSizePlugin({
       minChunkSize: 51200 // ~50kb
     }),
+
     // Minify the bundle
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -55,22 +55,18 @@ const config = {
     new webpack.NoErrorsPlugin(),
     new SWPrecacheWebpackPlugin(
       {
-        cacheId: 'ad-pwa-cache1',
+        cacheId: 'ad-pwa-t2hub-cache2',
         filename: 'ad-service-worker.js',
-        maximumFileSizeToCacheInBytes: 104857600,
+        maximumFileSizeToCacheInBytes: 104857600, // 100Mb
         staticFileGlobs: [
           'build/manifest.json',
           'build/**/*.{html,css,js}',
-          'build/static/**/*.{png,jpg,jpeg,svg,gif,mp4,json}'
+          'build/static/**/*.{png,jpg,jpeg,svg,gif,json}'
         ],
         runtimeCaching: [
           {
             handler: 'cacheFirst',
             urlPattern: /dynamic\/[\w_-]+\.(gif|jpg|jpeg|png|svg)$/i
-          },
-          {
-            handler: 'networkFirst',
-            urlPattern: /dynamic\/[\w_-]+\.(mp4|mp3)$/i
           }
         ],
         'stripPrefix': 'build/'
