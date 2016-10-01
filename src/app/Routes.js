@@ -56,37 +56,8 @@ import createMigration from 'redux-persist-migrate';
   }
 })();
 
-function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename or just do one object level
-  Object.keys(src).forEach(function (objId) {
-    objId += '';
-    var currObj = src[objId];
-    Object.keys(currObj).forEach(function (key) {
-      key += '';
-      if (ignoreKeys.indexOf(key) !== -1) {
-        console.log('deleting src key: ' + key);
-        console.log(src[objId][key]);
-        if (trgt[objId] && trgt[objId][key]) {
-          src[objId][key] = trgt[objId][key];
-        }
-      }
-    });
-  });
-  return Object.assign({}, trgt, src);
-}
 const manifest = {
-  21: (state) => (!state.apps ? state : {...state, apps: undefined}),
-  22: (state) => (!state.t2AppIds ? state : {...state, t2AppIds: undefined}),
-  /**
-   * Migration 23
-   *
-   * Changed link on an existing app
-   */
-  23: (state) => (!state.apps ? state : {...state, apps: undefined}),
-  /**
-   * Migration 24
-   *
-   * I think the previous migration(s) have flaw
-   */
+  22: (state) => ({...state, t2AppIds: undefined}),
   26: (state) => ({...state, apps: undefined})
 };
 
