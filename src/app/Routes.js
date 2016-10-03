@@ -23,6 +23,7 @@ const manifest = {
   22: (state) => ({...state, t2AppIds: undefined}),
   26: (state) => ({...state, apps: undefined}),
   9001: (state) => ({...state, navigation: undefined}),
+  9002: (state) => ({...state, apps: undefined})
 };
 
 // reducerKey is the key of the reducer you want to store the state version in
@@ -80,7 +81,7 @@ class AppProvider extends React.Component {
     persistStore(store, {keyPrefix: 'reduxPresistT2Hub'}, () => {
       setTimeout(() => {
         this.setState({ rehydrated: true });
-      }, 2000);
+      }, 500);
     });
   }
 
