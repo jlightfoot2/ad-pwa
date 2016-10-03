@@ -83,9 +83,9 @@ function parse(e){for(var t,r=[],n=0,o=0,a="";null!=(t=PATH_REGEXP.exec(e));){va
 
 
 /* eslint-disable quotes, comma-spacing */
-var PrecacheConfig = [["app.js","1a0a99552c0018db3628606c8576a0ff"],["index.html","bc707da057c90b238db19d3a0ac9eec5"],["main-04312762f51e2ceefa7ee046a1f1e37d.css","04312762f51e2ceefa7ee046a1f1e37d"],["manifest.json","0026a507424229a61fe8c32faca20a9f"],["static/afdep_alcohol_topics_lg-d7a39605978dd610bb8bef762dff8818.png","d7a39605978dd610bb8bef762dff8818"],["static/afdep_anger_topics_lg-97b8144cdbe89a42950f698e31c1b7fc.png","97b8144cdbe89a42950f698e31c1b7fc"],["static/afdep_injury_topics_lg-587ab008d548857b03736ce39bd21736.png","587ab008d548857b03736ce39bd21736"],["static/afdep_tobacco_topics_lg-8f8513445f39402fbfed16ccac888b9d.png","8f8513445f39402fbfed16ccac888b9d"],["static/depression-what-is-depression-48a0d423f183c4f2b68374b6a70d79b0.jpg","48a0d423f183c4f2b68374b6a70d79b0"],["static/flag-2bd43ec7f1281ea74ea6449094bc2f48.jpg","2bd43ec7f1281ea74ea6449094bc2f48"],["static/intro-pts-b5c5d989eef545a5021cbeb6e7118dfd.png","b5c5d989eef545a5021cbeb6e7118dfd"],["static/lg-icon-b2r_3-5f7ebeee11a34da050ded5681907816c.png","5f7ebeee11a34da050ded5681907816c"],["static/mtbi-what-is-tbi-30de23a6be687df059a169b8d013df2b.jpg","30de23a6be687df059a169b8d013df2b"],["static/star_144-a059d86c61cae9f31318d8f2cb27153f.png","a059d86c61cae9f31318d8f2cb27153f"],["static/star_152-db2e9d0b91625a1c1dd937b74a4916e2.png","db2e9d0b91625a1c1dd937b74a4916e2"],["static/star_32-c2841233c38c89e6b77b3201cf91ad72.png","c2841233c38c89e6b77b3201cf91ad72"]];
+var PrecacheConfig = [["app.js","e6f80b2e8f52c6692a4b2563c1627325"],["index.html","bc707da057c90b238db19d3a0ac9eec5"],["main-04312762f51e2ceefa7ee046a1f1e37d.css","04312762f51e2ceefa7ee046a1f1e37d"],["manifest.json","0026a507424229a61fe8c32faca20a9f"],["static/afdep_alcohol_topics_lg-d7a39605978dd610bb8bef762dff8818.png","d7a39605978dd610bb8bef762dff8818"],["static/afdep_anger_topics_lg-97b8144cdbe89a42950f698e31c1b7fc.png","97b8144cdbe89a42950f698e31c1b7fc"],["static/afdep_injury_topics_lg-587ab008d548857b03736ce39bd21736.png","587ab008d548857b03736ce39bd21736"],["static/afdep_tobacco_topics_lg-8f8513445f39402fbfed16ccac888b9d.png","8f8513445f39402fbfed16ccac888b9d"],["static/depression-what-is-depression-48a0d423f183c4f2b68374b6a70d79b0.jpg","48a0d423f183c4f2b68374b6a70d79b0"],["static/flag-2bd43ec7f1281ea74ea6449094bc2f48.jpg","2bd43ec7f1281ea74ea6449094bc2f48"],["static/intro-pts-b5c5d989eef545a5021cbeb6e7118dfd.png","b5c5d989eef545a5021cbeb6e7118dfd"],["static/lg-icon-b2r_3-5f7ebeee11a34da050ded5681907816c.png","5f7ebeee11a34da050ded5681907816c"],["static/mtbi-what-is-tbi-30de23a6be687df059a169b8d013df2b.jpg","30de23a6be687df059a169b8d013df2b"],["static/star_144-a059d86c61cae9f31318d8f2cb27153f.png","a059d86c61cae9f31318d8f2cb27153f"],["static/star_152-db2e9d0b91625a1c1dd937b74a4916e2.png","db2e9d0b91625a1c1dd937b74a4916e2"],["static/star_32-c2841233c38c89e6b77b3201cf91ad72.png","c2841233c38c89e6b77b3201cf91ad72"]];
 /* eslint-enable quotes, comma-spacing */
-var CacheNamePrefix = 'sw-precache-v1-ad-pwa-cache1-' + (self.registration ? self.registration.scope : '') + '-';
+var CacheNamePrefix = 'sw-precache-v1-ad-pwa-t2hub-cache2-' + (self.registration ? self.registration.scope : '') + '-';
 
 
 var IgnoreUrlParametersMatching = [/^utm_/];
@@ -311,7 +311,6 @@ self.addEventListener('fetch', function(event) {
 // Runtime cache configuration, using the sw-toolbox library.
 
 toolbox.router.get(/dynamic\/[\w_-]+\.(gif|jpg|jpeg|png|svg)$/i, toolbox.cacheFirst, {});
-toolbox.router.get(/dynamic\/[\w_-]+\.(mp4|mp3)$/i, toolbox.networkFirst, {});
 
 
 
