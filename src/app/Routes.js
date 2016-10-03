@@ -1,93 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './Main.js';
 import HomePage from './HomePage.js';
 import MyApps from './MyApps.js';
 import Catalog from './Catalog.js';
-import { Router, Route, hashHistory } from 'react-router';
+import BlankPage from './BlankPage.js';
+import HomeRoute from './routes/homeRoute.js';
+import SplashPage from './SplashPage.js';
+import { Router, Route, hashHistory, browserHistory } from 'react-router';
+
 import {createStore, applyMiddleware, compose} from 'redux';
 import { Provider } from 'react-redux';
 import appHub, {appItems} from './reducers';
-import {syncHistoryWithStore} from 'react-router-redux';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import {deviceMiddleware} from 'local-t2-device-redux';
 import {navigationCreateMiddleware} from 'local-t2-navigation-redux';
 import navigationConfig from './navigationConfig';
 import createMigration from 'redux-persist-migrate';
+import {registerPromise} from 'local-t2-app-redux';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
-/**
- * Register/Manage service worker
- *
- */
-
-(function () {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./ad-service-worker.js').then(function (reg) {
-      reg.onupdatefound = function () {
-        // The updatefound event implies that reg.installing is set; see
-        // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
-        var installingWorker = reg.installing;
-
-        installingWorker.onstatechange = function () {
-          switch (installingWorker.state) {
-            case 'installed':
-              if (navigator.serviceWorker.controller) {
-                // At this point, the old content will have been purged and the fresh content will
-                // have been added to the cache.
-                // It's the perfect time to display a 'New content is available; please refresh.'
-                // message in the page's interface.
-                console.log('New or updated content is available.');
-              } else {
-                // At this point, everything has been precached.
-                // It's the perfect time to display a 'Content is cached for offline use.' message.
-                console.log('Content is now available offline!');
-              }
-              break;
-
-            case 'redundant':
-              console.error('The installing service worker became redundant.');
-              break;
-          }
-        };
-      };
-    }).catch(function (e) {
-      console.error('Error during service worker registration:', e);
-    });
-  }
-})();
-
-function changeObjectKeys (trgt, src, ignoreKeys = []) { // TODO rename or just do one object level
-  Object.keys(src).forEach(function (objId) {
-    objId += '';
-    var currObj = src[objId];
-    Object.keys(currObj).forEach(function (key) {
-      key += '';
-      if (ignoreKeys.indexOf(key) !== -1) {
-        console.log('deleting src key: ' + key);
-        console.log(src[objId][key]);
-        if (trgt[objId] && trgt[objId][key]) {
-          src[objId][key] = trgt[objId][key];
-        }
-      }
-    });
-  });
-  return Object.assign({}, trgt, src);
-}
 const manifest = {
-  21: (state) => (!state.apps ? state : {...state, apps: undefined}),
-  22: (state) => (!state.t2AppIds ? state : {...state, t2AppIds: undefined}),
-  /**
-   * Migration 23
-   *
-   * Changed link on an existing app
-   */
-  23: (state) => (!state.apps ? state : {...state, apps: undefined}),
-  /**
-   * Migration 24
-   *
-   * I think the previous migration(s) have flaw
-   */
-  26: (state) => ({...state, apps: undefined})
+  22: (state) => ({...state, t2AppIds: undefined}),
+  26: (state) => ({...state, apps: undefined}),
+  9001: (state) => ({...state, navigation: undefined}),
+  9002: (state) => ({...state, apps: undefined})
 };
 
 // reducerKey is the key of the reducer you want to store the state version in
@@ -97,41 +33,65 @@ const migration = createMigration(manifest, reducerKey);
 const persistEnhancer = compose(migration, autoRehydrate());
 
 let store = createStore(appHub,
-  applyMiddleware(deviceMiddleware, navigationCreateMiddleware(navigationConfig))
+  applyMiddleware(routerMiddleware(browserHistory), deviceMiddleware, navigationCreateMiddleware(navigationConfig))
   , persistEnhancer);
+
 const history = syncHistoryWithStore(hashHistory, store);
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
+if (__INCLUDE_SERVICE_WORKER__) {
+  if ('serviceWorker' in navigator) {
+    const registrationPromise = navigator.serviceWorker.register('./ad-service-worker.js');
+    registerPromise(registrationPromise, store).then(function (res) {
+      if (__DEVTOOLS__) {
+        console.log(res);
+      }
+    }).catch(function (e) {
+      if (__DEVTOOLS__) {
+        console.log(e);
+      }
+      throw e;
+    });
+  }
+}
 
+if (__DEVTOOLS__) {
+  store.subscribe(() => {
+    console.log(store.getState());
+  });
+}
+const rootRoute = [
+  {
+    getComponent (nextState, cb) {
+      cb(null, BlankPage);
+    },
+    name: 'root',
+    childRoutes: [
+      require('./routes/mainPageRoute.js').default
+    ]
+  }
+];
 class AppProvider extends React.Component {
 
-  constructor () {
-    super();
+  constructor (props, context) {
+    super(props, context);
     this.state = { rehydrated: false };
   }
 
   componentWillMount () {
-    persistStore(store, {keyPrefix: 'reduxPresistAd'}, () => {
-      this.setState({ rehydrated: true });
+    persistStore(store, {keyPrefix: 'reduxPresistT2Hub'}, () => {
+      setTimeout(() => {
+        this.setState({ rehydrated: true });
+      }, 500);
     });
   }
 
   render () {
     if (!this.state.rehydrated) {
-      return <div>Loading...</div>;
+      return <BlankPage><SplashPage/></BlankPage>;
     }
     return (
       <Provider store={store}>
-        <Router history={history}>
-          <Route component={Main}>
-            {/* make them children of `App` */}
-            <Route path="/" component={HomePage} />
-            <Route path="/apps" component={MyApps} />
-            <Route path="/catalog" component={Catalog} />
-          </Route>
-        </Router>
+        <Router history={history} routes={rootRoute} />
       </Provider>
     );
   }

@@ -19,6 +19,8 @@ import {Link} from 'react-router';
 import AppSnackBar from './AppSnackBar.js';
 import { connect } from 'react-redux';
 import {deviceActions} from 'local-t2-device-redux';
+import {UpdateDialogContainer} from 'local-t2-app-redux/lib/components';
+
 var {windowResize} = deviceActions;
 
 const styles = {
@@ -44,16 +46,6 @@ const styles = {
     zIndex: -2
   }
 };
-
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: '#315B85',
-    primary2Color: '#315B85',
-    accent1Color: '#DEA326',
-    accent2Color: '#DEA326',
-    accent3Color: '#DEA326'
-  }
-});
 
 class Main extends Component {
   constructor (props, context) {
@@ -95,7 +87,6 @@ class Main extends Component {
     var wrapper = {...styles.wrapper, minHeight: device.height};
     var content = {...styles.content, minHeight: device.height - navBarHeight};
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
         <div style={wrapper}>
           <div style={styles.bgDiv} />
           <AppBar title={this.state.title}
@@ -104,12 +95,11 @@ class Main extends Component {
 
           />
           <div style={content}>
-            
             {React.cloneElement(this.props.children, {appBarTitle: this.handleTitle})}
-            <AppSnackBar />
           </div>
+          <AppSnackBar />
+          <UpdateDialogContainer />
         </div>
-      </MuiThemeProvider>
     );
   }
 }

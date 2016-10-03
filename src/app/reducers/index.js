@@ -2,15 +2,14 @@ import {combineReducers} from 'redux';
 import { routerReducer } from 'react-router-redux';
 import {deviceReducer} from 'local-t2-device-redux';
 import {navigationReducer} from 'local-t2-navigation-redux';
+import {appReducer} from 'local-t2-app-redux';
+
 import {
   ADD_T2APP_TO_MYAPPS_LIST,
   REMOVE_T2APP_FROM_MYAPPS_LIST,
   TOGGLE_T2APP_FROM_MYAPPS_LIST,
-  USER_SEES_INTRO,
-  USER_SEES_SPLASH,
   SHOW_FLASH_MESSAGE,
-  HIDE_FLASH_MESSAGE,
-  TAB_CHANGE_INDEX
+  HIDE_FLASH_MESSAGE
 } from '../actions';
 import { normalize, Schema, arrayOf } from 'normalizr';
 
@@ -196,20 +195,9 @@ const defaultUser = {
  *
  * @return object the new state or the current state
  */
-function user(state = defaultUser, action){
-  switch(action.type){
-    case USER_SEES_SPLASH:
-      if(state.stage !== 0){
-        return state
-      }
-      state.stage = 1;
-      return  {...state};
-    case USER_SEES_INTRO:
-      if(state.stage !== 1){
-        return state
-      }
-      state.stage = 2;
-      return  {...state};
+function user (state = defaultUser, action) {
+  switch (action.type) {
+
   }
   return state;
 }
@@ -294,17 +282,12 @@ export const view = (state = defaultView, action) => {
       state.flash.message = '';
       state.flash.open = false;
       return {...state};
-    case TAB_CHANGE_INDEX:
-      if (typeof state.tabs[action.id] !== 'undefined') {
-        state.tabs[action.id] = action.index;
-        return {...state};
-      }
-      return state;
   }
   return state;
 };
 
 const appHub = combineReducers({
+  app: appReducer,
   apps,
   t2AppIds,
   myAppIds,
