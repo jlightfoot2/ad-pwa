@@ -4,11 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 
 export default class HomePage extends React.Component {
-  constructor (props) {
-    super(props);
-    this.props = props;
-    this.componentDidMount = this.componentDidMount.bind(this)
-  }
 
   componentDidMount () {
     this.props.appBarTitle('Intro');

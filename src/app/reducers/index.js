@@ -282,12 +282,6 @@ export const view = (state = defaultView, action) => {
       state.flash.message = '';
       state.flash.open = false;
       return {...state};
-    case TAB_CHANGE_INDEX:
-      if (typeof state.tabs[action.id] !== 'undefined') {
-        state.tabs[action.id] = action.index;
-        return {...state};
-      }
-      return state;
   }
   return state;
 };
